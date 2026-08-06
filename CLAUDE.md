@@ -2,6 +2,11 @@
 
 # Caio Stato
 
+## Dev tools description for building frontend engineer portfolio
+
+This project is a landing page for a frontend engineer portfolio.
+For it will be using skills such ui-ux-pro-max for font combinations; taste-skill for general design; impeccable for polishing; review-animations for animations; humanizer for reviewing text contents; find-animation-opportunities for finds animations gap; and apple-design for general design layout control;
+
 **Frontend Engineer | React & Next.js Architecture Expert**  
 📍 Sorocaba, SP, Brazil | 📞 +55 15 99631-9599 | ✉️ caio.stato@hotmail.com  
 🔗 [LinkedIn](https://linkedin.com/in/caiostato) | 🐙 [GitHub](https://github.com/caiostato) | 🌐 [Portfolio](https://caiostato.vercel.app)

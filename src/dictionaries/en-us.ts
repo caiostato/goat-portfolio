@@ -2,132 +2,170 @@ import type { Dictionary } from "./types";
 
 const dictionary: Dictionary = {
   meta: {
-    title: "Caio Stato — Frontend Engineer | React & Next.js",
+    title: "Caio Stato | Frontend Engineer, React & Next.js",
     description:
-      "Caio Stato's portfolio, a Frontend Engineer with 4+ years of experience building high-performance applications with React and Next.js for fintech platforms and digital products.",
+      "Portfolio of Caio Stato, a frontend engineer with 4+ years building React and Next.js applications for fintech platforms and digital products.",
   },
   nav: {
     ariaLabel: "Main navigation",
     items: [
+      { label: "Work", href: "#work" },
       { label: "Experience", href: "#experience" },
       { label: "Capabilities", href: "#capabilities" },
       { label: "Stack", href: "#stack" },
-      { label: "Info", href: "#philosophy" },
     ],
     contact: "Contact",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
   },
   hero: {
     badge: "Available for new projects",
-    heading: "High-performance React & Next.js architecture",
+    heading: "React and Next.js architecture that holds up under load",
     subtitle:
-      "Frontend Engineer with 4+ years building scalable fintech platforms and digital products, focused on performance, clean architecture, and design systems.",
-    ctaPrimary: "View my experience",
-    ctaSecondary: "Get in touch",
-    heroAlt:
-      "Abstract 3D rendering representing software engineering and product design",
+      "Four years on fintech platforms and digital products, spent on render cost, bundle size, and code that survives the next engineer.",
+    ctaPrimary: "See the work",
+    role: "Frontend Engineer",
+    stats: [
+      { value: "4+", label: "Years shipping frontend" },
+      { value: "30%", label: "Operational efficiency gain" },
+      { value: "99.9%", label: "System reliability" },
+    ],
+  },
+  projects: {
+    heading: "Selected projects",
+    description:
+      "Two projects where the frontend work had a number attached to it.",
+    items: [
+      {
+        title: "Cerasos sales platform",
+        description:
+          "Pharmacy sales platform that runs on WhatsApp. Customers message, the Uazapi integration answers and creates the order, and Getnet handles payment from tokenization through the webhook that confirms it. An admin dashboard sits on top for order tracking, sales figures, and customer ratings.",
+        role: "Fullstack Engineer",
+        period: "2025",
+        metrics: [
+          { value: "99.9%", label: "System reliability" },
+          { value: "100%", label: "Orders automated" },
+        ],
+        tags: ["Next.js", "TypeScript", "Getnet", "Uazapi"],
+      },
+      {
+        title: "AR3 Capital financial platform",
+        description:
+          "Internal financial services pulled into one client. Database lookups and reporting were the slow part, so those came first. The UI library shipped through Storybook so every view drew from the same components.",
+        role: "Frontend Engineer",
+        period: "2022 - 2024",
+        metrics: [
+          { value: "+30%", label: "Operational efficiency" },
+          { value: "100%", label: "Views on the UI library" },
+        ],
+        tags: ["React", "Storybook", "TypeScript", "REST APIs"],
+      },
+    ],
+    viewLive: "Visit site",
+    viewRepo: "Source",
+    liveLabel: "Live",
+    privateLabel: "Private work",
+    empty: "Projects are being written up. Check back shortly.",
   },
   experience: {
-    heading: "Professional Experience",
-    index: "02",
+    heading: "Experience",
     items: [
       {
         company: "Cerasos",
-        period: "Dec 2025 — Present",
+        period: "Dec 2025 - Present",
         role: "Fullstack Engineer",
         highlights: [
-          "Spearheaded the development of an automated pharmacy sales platform by integrating WhatsApp (via Uazapi), enabling automated customer interactions, real-time responses, and instant order creation.",
-          "Architected an end-to-end payment processing engine with Next.js, TypeScript, and the Getnet API, implementing secure tokenization, custom checkout flows, and real-time webhook listeners for status updates.",
-          "Engineered an administrative dashboard for sales and customer feedback, centralizing order tracking, sales analytics, and customer rating metrics to streamline pharmacy operations.",
-          "Maintained full-stack infrastructure and deployment pipelines, managing server hosting, database synchronization, API orchestration, and comprehensive testing suites to ensure 99.9% system reliability.",
+          "Built a pharmacy sales platform on top of WhatsApp through Uazapi, so a customer message turns into a real order without anyone typing it in.",
+          "Wrote the payment engine in Next.js and TypeScript against the Getnet API: tokenization, a custom checkout, and webhook listeners that keep order status in sync.",
+          "Built the admin dashboard for orders, sales figures, and customer ratings, which replaced the spreadsheets the pharmacy was using.",
+          "Own the infrastructure too, including hosting, database sync, API orchestration, and the test suite that keeps reliability at 99.9%.",
         ],
         stack: ["Next.js", "TypeScript", "Getnet", "Uazapi"],
       },
       {
         company: "Ziion Tech",
-        period: "Feb 2025 — Present",
+        period: "Feb 2025 - Present",
         role: "Frontend Engineer",
         highlights: [
-          "Engineered a scalable property showcase web application using Next.js and Tailwind CSS, optimizing Core Web Vitals and significantly reducing initial page load times.",
-          "Built a modular, reusable internal UI component library, accelerating future feature deployment velocity by an estimated 20%.",
-          "Developed a centralized administrative dashboard for employee management, streamlining operations and internal data visualization.",
-          "Implemented automated unit testing workflows using Jest, raising core code coverage and ensuring interface stability.",
+          "Built a property showcase app in Next.js and Tailwind CSS, with Core Web Vitals as the thing we optimized against rather than a report we read afterwards.",
+          "Put together the internal UI component library, which cut roughly 20% off the time it takes to ship a new feature.",
+          "Built the admin dashboard for employee management and the internal data views that go with it.",
+          "Set up the Jest workflows so unit tests run without anyone remembering to run them.",
         ],
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Jest"],
       },
       {
         company: "eAcademy",
-        period: "Jun 2024 — Nov 2024",
+        period: "Jun 2024 - Nov 2024",
         role: "Frontend Engineer",
         highlights: [
-          "Developed user-centered web applications for time scheduling and interactive calendar views using Next.js and Shadcn UI.",
-          "Built dynamic data dashboards utilizing Redux and Framer Motion, collaborating with backend engineers to map robust API contracts.",
-          "Automated frontend testing blocks within CI/CD pipelines, reducing manual verification efforts and securing stable software releases.",
-          "Enforced high code quality standards through detailed code reviews, comprehensive documentation, and clean architecture practices.",
+          "Built the scheduling and calendar views in Next.js and Shadcn UI.",
+          "Built the data dashboards with Redux and Framer Motion, working with the backend team to pin down the API contracts first.",
+          "Moved the frontend test suite into the CI/CD pipeline, which took manual verification out of the release path.",
+          "Reviewed code and wrote the documentation that kept the architecture decisions from getting lost.",
         ],
         stack: ["Next.js", "Redux", "Shadcn UI", "Framer Motion"],
       },
       {
         company: "AR3 Capital",
-        period: "Oct 2022 — Feb 2024",
+        period: "Oct 2022 - Feb 2024",
         role: "Frontend Engineer",
         highlights: [
-          "Spearheaded core client-side development to centralize internal financial services, maximizing platform stability and workflow speed.",
-          "Streamlined complex database lookups and internal reporting engines, driving a documented 30% increase in operational efficiency.",
-          "Designed and published an enterprise-wide UI library via Storybook, ensuring strong brand and design consistency across 100% of views.",
-          "Maintained complete frontend project ownership in high-responsibility scenarios while aligning directly with cross-functional product squads.",
+          "Led the client-side work to bring internal financial services into one platform.",
+          "Rewrote the database lookups and reporting engines, which moved operational efficiency up 30%.",
+          "Built and published the company UI library through Storybook, and every view ended up on it.",
+          "Owned the frontend end to end and worked directly with the product squads.",
         ],
         stack: ["React", "Storybook", "TypeScript", "REST APIs"],
       },
       {
         company: "RN3",
-        period: "Apr 2023 — Oct 2023",
+        period: "Apr 2023 - Oct 2023",
         role: "Software Engineer (Full Stack)",
         highlights: [
-          "Successfully migrated legacy data modules from Angular to a modern, responsive stack powered by Next.js and Node.js.",
-          "Engineered secure full-stack features integrating commercial payment systems via Stripe and interactive business analytics tools.",
-          "Optimized complex PostgreSQL database queries, achieving a documented 25% performance improvement across data retrieval pipelines.",
-          "Integrated dynamic Power BI visualization dashboards, reducing data processing overhead and aligning features with UX goals.",
+          "Migrated the legacy data modules off Angular onto Next.js and Node.js.",
+          "Built the Stripe payment integration and the business analytics features around it.",
+          "Rewrote the slow PostgreSQL queries, which got data retrieval 25% faster.",
+          "Embedded Power BI dashboards so the reporting stopped going through a separate processing step.",
         ],
         stack: ["Next.js", "Node.js", "PostgreSQL", "Stripe"],
       },
       {
         company: "Hybank",
-        period: "Sep 2021 — Sep 2022",
+        period: "Sep 2021 - Sep 2022",
         role: "Mobile Developer",
         highlights: [
-          "Developed cross-platform mobile fintech applications using React Native, delivering a seamless experience across iOS and Android.",
-          "Designed a custom mobile design system to scale new UI properties efficiently while cutting future layout development time.",
-          "Managed complex application state trees using Redux, connecting client views to transaction-heavy banking REST APIs.",
-          "Conducted thorough device usability and performance testing, reducing production errors and improving app store stability.",
+          "Built cross-platform fintech apps in React Native for iOS and Android.",
+          "Designed the mobile design system, which cut the layout work on every screen after it.",
+          "Managed the Redux state tree connecting the app to transaction-heavy banking REST APIs.",
+          "Ran device usability and performance testing, which brought production errors down and app store stability up.",
         ],
         stack: ["React Native", "Redux", "REST APIs"],
       },
     ],
   },
   capabilities: {
-    heading: "Core Capabilities",
-    index: "03",
+    heading: "What I do",
     items: [
       {
-        title: "Frontend Engineering",
+        title: "Frontend engineering",
         description:
-          "Building robust, scalable React and Next.js applications, focused on client-side performance optimization, Core Web Vitals, and accessibility.",
+          "React and Next.js applications built to stay fast as they grow. Core Web Vitals and accessibility get measured, not assumed.",
       },
       {
-        title: "Payments & Fintech",
+        title: "Payments and fintech",
         description:
-          "Payment gateway integration (Stripe, Getnet) from sandbox to production, including tokenization, webhooks, and PCI-compliant checkout flows.",
+          "Stripe and Getnet integrations from sandbox through production, including tokenization, webhooks, and PCI-compliant checkout.",
       },
       {
-        title: "Design Systems & Architecture",
+        title: "Design systems and architecture",
         description:
-          "Designing reusable component libraries and UI systems with Storybook, applying Clean Architecture and Domain-Driven Design.",
+          "Component libraries in Storybook, with Clean Architecture and DDD applied where the domain is complex enough to need them.",
       },
     ],
   },
   stack: {
-    heading: "Tech Stack",
-    index: "04",
+    heading: "Stack",
     items: [
       "TypeScript",
       "React",
@@ -151,16 +189,16 @@ const dictionary: Dictionary = {
     ],
   },
   philosophy: {
-    label: "Philosophy",
+    label: "How I work",
     quote:
-      "I believe in modular, well-thought-out software architecture — Clean Architecture and DDD aren't academic, they're what lets a team ship fast without piling up technical debt. Performance and accessibility are the consequence of well-structured code, not rework at the end.",
+      "Clean Architecture and DDD are not academic exercises. They are what lets a team keep shipping without the codebase turning against them. Performance and accessibility follow from structure. You do not bolt them on at the end.",
   },
   connect: {
     heading: "Let's talk",
-    body: "Currently open to new opportunities. If you have a question or just want to say hi, I'll do my best to respond.",
+    body: "Open to new opportunities. Send a question, or just say hi, and I will get back to you.",
     emailCta: "Send an email",
     copyCta: "Copy email",
-    copiedCta: "Email copied!",
+    copiedCta: "Email copied",
   },
   footer: {
     ariaLabel: "Footer links",
@@ -171,7 +209,7 @@ const dictionary: Dictionary = {
         href: "https://linkedin.com/in/caiostato",
         external: true,
       },
-      { label: "Info", href: "#philosophy", external: false },
+      { label: "How I work", href: "#philosophy", external: false },
     ],
     copyright: "© 2026 Caio Stato",
   },

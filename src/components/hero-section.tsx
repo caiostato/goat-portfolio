@@ -1,53 +1,63 @@
 import { ArrowRight } from "lucide-react";
+
 import type { Dictionary } from "@/dictionaries/types";
 
+/**
+ * A typographic masthead. No image, so the headline has to do the work: it
+ * runs near the full width of the container at display scale, with rules and
+ * mono labels giving the section its structure the way a printed nameplate
+ * would.
+ *
+ * The three blocks are pushed apart to fill the viewport rather than stacked
+ * with fixed gaps, so the type reads as a poster on a laptop and still
+ * collapses sensibly on a phone.
+ */
 export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
   return (
-    <section id="top" className="border-b border-border">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:py-28 lg:py-32">
-        <div className="flex flex-col gap-6">
-          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-xs text-muted-foreground">
-            <span
-              className="h-2 w-2 rounded-full bg-emerald-400"
-              aria-hidden="true"
-            />
+    <section id="top" className="px-6 md:px-8">
+      <div className="mx-auto flex min-h-[86svh] w-full max-w-7xl flex-col justify-between gap-14 pt-10 pb-16 md:pt-14">
+        <div
+          style={{ "--enter-delay": "0ms" } as React.CSSProperties}
+          className="enter flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-border pb-5"
+        >
+          <span className="type-label text-foreground-subtle">{dict.role}</span>
+
+          {/* Availability stated on the record, not badged with a blinking dot. */}
+          <span className="type-label flex items-center gap-3 text-brand">
+            <span className="h-px w-8 bg-brand" aria-hidden="true" />
             {dict.badge}
           </span>
+        </div>
 
-          <h1 className="text-balance font-display text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            {dict.heading}
-          </h1>
+        <h1
+          style={{ "--enter-delay": "80ms" } as React.CSSProperties}
+          className="enter type-hero max-w-[14ch] text-balance text-foreground"
+        >
+          {dict.heading}
+        </h1>
 
-          <p className="max-w-md text-pretty text-lg leading-relaxed text-muted-foreground">
+        <div className="grid gap-10 border-t border-border pt-8 md:grid-cols-12">
+          <p
+            style={{ "--enter-delay": "160ms" } as React.CSSProperties}
+            className="enter type-lead text-pretty text-muted-foreground md:col-span-6 lg:col-span-5"
+          >
             {dict.subtitle}
           </p>
 
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+          <div
+            style={{ "--enter-delay": "240ms" } as React.CSSProperties}
+            className="enter flex md:col-span-5 md:col-start-8 md:justify-end"
+          >
             <a
-              href="#experience"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
+              href="#work"
+              className="group inline-flex items-center gap-3 border-b-2 border-brand pb-1.5 font-display text-xl font-semibold tracking-tight text-foreground transition-colors duration-200 hover:text-brand md:text-2xl"
             >
               {dict.ctaPrimary}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              <ArrowRight
+                className="h-5 w-5 text-brand transition-transform duration-200 ease-out group-hover:translate-x-1 motion-reduce:transform-none"
+                aria-hidden="true"
+              />
             </a>
-            <a
-              href="#connect"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
-            >
-              {dict.ctaSecondary}
-            </a>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="overflow-hidden rounded-2xl border border-border">
-            <img
-              src="/hero-visual.png"
-              alt={dict.heroAlt}
-              className="h-full w-full object-cover"
-              width={640}
-              height={480}
-            />
           </div>
         </div>
       </div>

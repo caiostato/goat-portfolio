@@ -1,13 +1,19 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Space_Grotesk, Inter, Geist } from "next/font/google";
+import { Space_Grotesk, Geist, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import { cn } from "@/lib/utils";
 import { htmlLangMap, isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "./dictionaries";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+// Three families, three jobs: Geist reads body copy, Space Grotesk carries the
+// headlines, JetBrains Mono handles the labels and metrics.
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
+});
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -15,9 +21,9 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-const inter = Inter({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -37,7 +43,6 @@ export async function generateMetadata({
   return {
     title: dict.meta.title,
     description: dict.meta.description,
-    generator: "v0.app",
     icons: {
       icon: [
         {
@@ -60,7 +65,7 @@ export async function generateMetadata({
 
 export const viewport: Viewport = {
   colorScheme: "dark",
-  themeColor: "#0a0a0b",
+  themeColor: "#0b0b0d",
 };
 
 export default async function RootLayout({
@@ -76,15 +81,32 @@ export default async function RootLayout({
   return (
     <html
       lang={htmlLangMap[lang]}
+      /*
+       * Scroll reveal is armed here, in the server-rendered markup, rather
+       * than by a script that mutates <html> before hydration: that mutation
+       * is invisible to the server render and React reports it as a
+       * hydration mismatch.
+       */
+      data-reveal="on"
       className={cn(
         "dark",
         "bg-background",
-        spaceGrotesk.variable,
-        inter.variable,
         "font-sans",
-        geist.variable
+        geist.variable,
+        spaceGrotesk.variable,
+        jetbrainsMono.variable
       )}
     >
+      <head>
+        {/*
+          The reveal styles hide content until JavaScript marks it visible, so
+          without scripting they would hide it permanently. This hands those
+          visitors the finished state instead.
+        */}
+        <noscript>
+          <style>{`[data-reveal="on"] .reveal{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === "production" && <Analytics />}

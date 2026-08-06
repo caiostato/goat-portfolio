@@ -1,100 +1,203 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, GitBranch, Lock } from "lucide-react";
 
-const projects = [
-  {
-    title: "Plataforma de Vendas Cerasos",
-    description:
-      "Plataforma automatizada de vendas para farmácias com atendimento via WhatsApp (Uazapi), motor de pagamentos ponta a ponta com Getnet e dashboard administrativo de vendas e feedback de clientes.",
-    image: "/projects/fintech-dashboard.png",
-    metrics: [
-      { value: "99,9%", label: "confiabilidade do sistema" },
-      { value: "100%", label: "pedidos automatizados" },
-    ],
-    tags: ["Next.js", "Getnet", "Uazapi"],
-  },
-  {
-    title: "Plataforma Financeira AR3",
-    description:
-      "Centralização de serviços financeiros internos com biblioteca de UI corporativa publicada via Storybook, unificando relatórios e buscas em banco de dados.",
-    image: "/projects/aura-wellness.png",
-    metrics: [
-      { value: "+30%", label: "eficiência operacional" },
-      { value: "100%", label: "consistência de UI" },
-    ],
-    tags: ["React", "Storybook", "REST APIs"],
-  },
-];
+import { Section, SectionHeader } from "@/components/ui/section";
+import { SitePreview } from "@/components/site-preview";
+import { cn } from "@/lib/utils";
+import type { Dictionary, Project } from "@/dictionaries/types";
 
-export function ProjectsSection() {
+type ProjectsDict = Dictionary["projects"];
+
+export function ProjectsSection({ dict }: { dict: ProjectsDict }) {
   return (
-    <section id="work" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
-        <header className="mb-12 flex items-end justify-between">
-          <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            Projetos selecionados
-          </h2>
-          <span className="font-mono text-sm text-muted-foreground">03</span>
-        </header>
+    <Section id="work" rhythm="loud" surface="hairline">
+      <SectionHeader heading={dict.heading} description={dict.description} />
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {projects.map((project) => (
-            <article
-              key={project.title}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-accent/50"
-            >
-              <div className="aspect-16/10 overflow-hidden border-b border-border">
-                <img
-                  src={project.image || "/placeholder.svg"}
-                  alt={`Prévia do projeto ${project.title}`}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  width={640}
-                  height={400}
-                />
-              </div>
-
-              <div className="flex flex-1 flex-col gap-4 p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-display text-lg font-semibold text-foreground">
-                    {project.title}
-                  </h3>
-                  <ArrowUpRight
-                    className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-accent"
-                    aria-hidden="true"
-                  />
-                </div>
-
-                <p className="text-pretty text-sm leading-relaxed text-muted-foreground">
-                  {project.description}
-                </p>
-
-                <div className="mt-auto flex gap-8 border-t border-border pt-4">
-                  {project.metrics.map((metric) => (
-                    <div key={metric.label}>
-                      <div className="font-mono text-xl font-bold text-accent">
-                        {metric.value}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {metric.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md border border-border px-2 py-1 font-mono text-xs text-muted-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </article>
+      {dict.items.length > 0 ? (
+        <ol className="flex flex-col gap-20 md:gap-28">
+          {dict.items.map((project, index) => (
+            <li key={project.title}>
+              <ProjectRow
+                project={project}
+                dict={dict}
+                priority={index === 0}
+                flipped={index % 2 === 1}
+              />
+            </li>
           ))}
-        </div>
+        </ol>
+      ) : (
+        <p className="type-body text-muted-foreground">{dict.empty}</p>
+      )}
+    </Section>
+  );
+}
+
+function ProjectRow({
+  project,
+  dict,
+  priority,
+  flipped,
+}: {
+  project: Project;
+  dict: ProjectsDict;
+  priority: boolean;
+  flipped: boolean;
+}) {
+  const isLive = Boolean(project.href);
+
+  return (
+    <article className="reveal grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      {/*
+        When there is a live site the whole frame is clickable, but it is
+        hidden from assistive tech and skipped by the keyboard: the button
+        below points at the same URL, so exposing both would just make screen
+        reader and tab users visit the same destination twice.
+      */}
+      <div className={cn("group", flipped && "lg:order-2")}>
+        {isLive ? (
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            tabIndex={-1}
+            aria-hidden="true"
+            className="block"
+          >
+            <SitePreview
+              project={project}
+              priority={priority}
+              sizes="(min-width: 1024px) 55vw, 100vw"
+            />
+          </a>
+        ) : (
+          <SitePreview
+            project={project}
+            priority={priority}
+            sizes="(min-width: 1024px) 55vw, 100vw"
+          />
+        )}
       </div>
-    </section>
+
+      <div
+        className={cn("flex flex-col items-start gap-5", flipped && "lg:order-1")}
+      >
+        <Meta project={project} isLive={isLive} dict={dict} />
+
+        <h3 className="type-h2 text-balance text-foreground">{project.title}</h3>
+
+        <p className="type-body max-w-prose text-pretty text-muted-foreground">
+          {project.description}
+        </p>
+
+        <Metrics project={project} />
+        <Tags project={project} />
+        <Actions project={project} dict={dict} />
+      </div>
+    </article>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+
+function Meta({
+  project,
+  isLive,
+  dict,
+}: {
+  project: Project;
+  isLive: boolean;
+  dict: ProjectsDict;
+}) {
+  const parts = [project.role, project.period].filter(Boolean);
+
+  return (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+      {parts.length > 0 ? (
+        <p className="type-label text-muted-foreground">{parts.join(" · ")}</p>
+      ) : null}
+
+      {/* Says up front whether there is anywhere to go, before the eye hunts. */}
+      {isLive ? (
+        <span className="type-label inline-flex items-center gap-1.5 rounded-full border border-brand-border bg-brand-subtle px-2.5 py-1 text-brand">
+          {dict.liveLabel}
+        </span>
+      ) : (
+        <span className="type-label inline-flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-muted-foreground">
+          <Lock className="h-3 w-3" aria-hidden="true" />
+          {dict.privateLabel}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function Metrics({ project }: { project: Project }) {
+  if (project.metrics.length === 0) return null;
+
+  return (
+    <dl className="flex flex-wrap gap-x-12 gap-y-4 border-t border-border pt-5">
+      {project.metrics.map((metric) => (
+        /* Reversed column keeps the value on top while the DOM keeps the
+           dt/dd order a definition list requires. */
+        <div key={metric.label} className="flex flex-col-reverse gap-1.5">
+          <dt className="type-label text-muted-foreground">{metric.label}</dt>
+          <dd className="type-metric text-brand">{metric.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function Tags({ project }: { project: Project }) {
+  if (project.tags.length === 0) return null;
+
+  return (
+    <ul className="flex flex-wrap gap-2">
+      {project.tags.map((tag) => (
+        <li
+          key={tag}
+          className="type-mono rounded-md border border-border px-2.5 py-1 text-xs text-muted-foreground"
+        >
+          {tag}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Actions({ project, dict }: { project: Project; dict: ProjectsDict }) {
+  if (!project.href && !project.repo) return null;
+
+  return (
+    <div className="flex flex-wrap items-center gap-3 pt-1">
+      {project.href ? (
+        <a
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group/cta inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-brand-foreground transition-[background-color,transform] duration-200 ease-out hover:bg-brand-strong active:translate-y-px motion-reduce:transform-none"
+        >
+          {dict.viewLive}
+          <ArrowUpRight
+            className="h-4 w-4 transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 motion-reduce:transform-none"
+            aria-hidden="true"
+          />
+          <span className="sr-only">: {project.title}</span>
+        </a>
+      ) : null}
+
+      {project.repo ? (
+        <a
+          href={project.repo}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full border border-border-strong px-5 py-2.5 text-sm font-medium whitespace-nowrap text-foreground transition-colors duration-200 hover:border-brand-border hover:text-brand"
+        >
+          <GitBranch className="h-4 w-4" aria-hidden="true" />
+          {dict.viewRepo}
+          <span className="sr-only">: {project.title}</span>
+        </a>
+      ) : null}
+    </div>
   );
 }

@@ -1,65 +1,54 @@
+import { Section, SectionHeader } from "@/components/ui/section";
 import type { Dictionary } from "@/dictionaries/types";
 
 export function ExperienceSection({ dict }: { dict: Dictionary["experience"] }) {
   return (
-    <section id="experience" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
-        <header className="mb-12 flex items-end justify-between">
-          <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            {dict.heading}
-          </h2>
-          <span className="font-mono text-sm text-muted-foreground">
-            {dict.index}
-          </span>
-        </header>
+    <Section id="experience" rhythm="standard" surface="hairline">
+      <SectionHeader heading={dict.heading} />
 
-        <div className="flex flex-col">
-          {dict.items.map((exp) => (
-            <article
-              key={exp.company}
-              className="grid gap-6 border-t border-border py-10 md:grid-cols-[1fr_2fr] md:gap-12"
-            >
-              <div className="flex flex-col gap-1">
-                <h3 className="font-display text-xl font-semibold text-foreground">
-                  {exp.company}
-                </h3>
-                <p className="text-sm font-medium text-accent">{exp.role}</p>
-                <p className="font-mono text-xs text-muted-foreground">
-                  {exp.period}
-                </p>
-              </div>
+      <ol className="flex flex-col">
+        {dict.items.map((exp) => (
+          <li
+            key={`${exp.company}-${exp.period}`}
+            className="reveal group grid gap-6 border-t border-border py-10 first:border-t-0 first:pt-0 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-14"
+          >
+            {/* Company block stays put while the highlights scroll past it. */}
+            <div className="flex flex-col gap-2 md:sticky md:top-24 md:self-start">
+              <h3 className="type-h3 text-foreground">{exp.company}</h3>
+              <p className="text-sm font-medium text-brand">{exp.role}</p>
+              <p className="type-label text-muted-foreground">{exp.period}</p>
+            </div>
 
-              <div className="flex flex-col gap-6">
-                <ul className="flex flex-col gap-3">
-                  {exp.highlights.map((highlight) => (
-                    <li
-                      key={highlight}
-                      className="flex gap-3 text-pretty text-sm leading-relaxed text-muted-foreground"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
-                      />
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="flex flex-wrap gap-2">
-                  {exp.stack.map((tech) => (
+            <div className="flex flex-col gap-6">
+              <ul className="flex flex-col gap-3.5">
+                {exp.highlights.map((highlight) => (
+                  <li
+                    key={highlight}
+                    className="type-body flex gap-3.5 text-pretty text-muted-foreground"
+                  >
                     <span
-                      key={tech}
-                      className="rounded-md border border-border px-2 py-1 font-mono text-xs text-muted-foreground"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+                      aria-hidden="true"
+                      className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-brand"
+                    />
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+
+              <ul className="flex flex-wrap gap-2">
+                {exp.stack.map((tech) => (
+                  <li
+                    key={tech}
+                    className="type-mono rounded-md border border-border px-2.5 py-1 text-xs text-muted-foreground"
+                  >
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Section>
   );
 }
