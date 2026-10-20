@@ -17,7 +17,7 @@ export function MobileNav({
     <Drawer.Root>
       <Drawer.Trigger
         aria-label={dict.menuOpen}
-        className="-mr-1 inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-card/80 text-foreground transition-colors hover:border-brand-border hover:text-brand md:hidden"
+        className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-border bg-card/80 text-foreground transition-colors hover:border-brand-border hover:text-brand md:hidden"
       >
         <Menu className="h-4 w-4" aria-hidden="true" />
       </Drawer.Trigger>
@@ -45,7 +45,7 @@ export function MobileNav({
 
               <Drawer.Close
                 aria-label={dict.menuClose}
-                className="-mt-1 -mr-2 inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:border-brand-border hover:text-foreground"
+                className="-mt-1 -mr-1 inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-brand-border hover:text-foreground"
               >
                 <X className="h-4 w-4" aria-hidden="true" />
               </Drawer.Close>
@@ -53,7 +53,7 @@ export function MobileNav({
 
             <Drawer.Content>
               <nav aria-label={dict.ariaLabel}>
-                <ul className="divide-y divide-border rounded-md border border-border bg-background/60">
+                <ul className="divide-y divide-border rounded-xl border border-border bg-background/60">
                   {dict.items.map((item, idx) => (
                     <li key={item.href} className="flex">
                       <Drawer.Close
@@ -73,7 +73,7 @@ export function MobileNav({
                 <Drawer.Close
                   nativeButton={false}
                   render={<a href="#connect" />}
-                  className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-md bg-brand px-4 font-mono text-xs font-bold tracking-wider text-brand-foreground uppercase transition-colors hover:bg-brand-strong"
+                  className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand px-4 font-mono text-xs font-bold tracking-wider text-brand-foreground uppercase transition-colors hover:bg-brand-strong"
                 >
                   <span
                     aria-hidden="true"
