@@ -9,17 +9,23 @@ type ProjectsDict = Dictionary["projects"];
 
 export function ProjectsSection({ dict }: { dict: ProjectsDict }) {
   return (
-    <Section id="work" rhythm="loud" surface="hairline">
-      <SectionHeader heading={dict.heading} description={dict.description} />
+    <Section id="work" rhythm="standard" surface="raised">
+      <SectionHeader
+        index="01"
+        code="WORK & LIVE DEMOS"
+        heading={dict.heading}
+        description={dict.description}
+      />
 
       {dict.items.length > 0 ? (
-        <ol className="flex flex-col gap-20 md:gap-28">
+        <ol className="flex flex-col gap-16 sm:gap-24 md:gap-32">
           {dict.items.map((project, index) => (
-            <li key={project.title}>
+            <li key={project.href ?? `${project.title}-${index}`}>
               <ProjectRow
                 project={project}
+                index={index}
                 dict={dict}
-                priority={index === 0}
+                priority={false}
                 flipped={index % 2 === 1}
               />
             </li>
@@ -34,11 +40,13 @@ export function ProjectsSection({ dict }: { dict: ProjectsDict }) {
 
 function ProjectRow({
   project,
+  index,
   dict,
   priority,
   flipped,
 }: {
   project: Project;
+  index: number;
   dict: ProjectsDict;
   priority: boolean;
   flipped: boolean;
@@ -46,44 +54,35 @@ function ProjectRow({
   const isLive = Boolean(project.href);
 
   return (
-    <article className="reveal grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-      {/*
-        When there is a live site the whole frame is clickable, but it is
-        hidden from assistive tech and skipped by the keyboard: the button
-        below points at the same URL, so exposing both would just make screen
-        reader and tab users visit the same destination twice.
-      */}
-      <div className={cn("group", flipped && "lg:order-2")}>
-        {isLive ? (
-          <a
-            href={project.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            tabIndex={-1}
-            aria-hidden="true"
-            className="block"
-          >
-            <SitePreview
-              project={project}
-              priority={priority}
-              sizes="(min-width: 1024px) 55vw, 100vw"
-            />
-          </a>
-        ) : (
-          <SitePreview
-            project={project}
-            priority={priority}
-            sizes="(min-width: 1024px) 55vw, 100vw"
-          />
+    <article className="reveal grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+      <div
+        className={cn(
+          "group flex justify-center lg:col-span-5",
+          flipped && "lg:order-2",
         )}
+      >
+        <SitePreview
+          key={project.href ?? `${project.title}-${index}`}
+          project={project}
+          index={index}
+          priority={priority}
+          livePreviewLabel={dict.interactivePreviewLabel}
+          architectureLabel={dict.architecturePreviewLabel}
+          sizes="(min-width: 1024px) 420px, 100vw"
+        />
       </div>
 
       <div
-        className={cn("flex flex-col items-start gap-5", flipped && "lg:order-1")}
+        className={cn(
+          "flex flex-col items-start gap-5 lg:col-span-7",
+          flipped && "lg:order-1",
+        )}
       >
         <Meta project={project} isLive={isLive} dict={dict} />
 
-        <h3 className="type-h2 text-balance text-foreground">{project.title}</h3>
+        <h3 className="type-h2 text-balance text-foreground">
+          {project.title}
+        </h3>
 
         <p className="type-body max-w-prose text-pretty text-muted-foreground">
           {project.description}
@@ -116,13 +115,16 @@ function Meta({
         <p className="type-label text-muted-foreground">{parts.join(" · ")}</p>
       ) : null}
 
-      {/* Says up front whether there is anywhere to go, before the eye hunts. */}
       {isLive ? (
-        <span className="type-label inline-flex items-center gap-1.5 rounded-full border border-brand-border bg-brand-subtle px-2.5 py-1 text-brand">
+        <span className="type-label inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-subtle px-3 py-1 text-brand">
+          <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75 motion-reduce:hidden" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />
+          </span>
           {dict.liveLabel}
         </span>
       ) : (
-        <span className="type-label inline-flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-muted-foreground">
+        <span className="type-label inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-muted-foreground">
           <Lock className="h-3 w-3" aria-hidden="true" />
           {dict.privateLabel}
         </span>
@@ -135,10 +137,8 @@ function Metrics({ project }: { project: Project }) {
   if (project.metrics.length === 0) return null;
 
   return (
-    <dl className="flex flex-wrap gap-x-12 gap-y-4 border-t border-border pt-5">
+    <dl className="flex flex-wrap gap-x-8 gap-y-4 border-t border-border/70 pt-5 sm:gap-x-12">
       {project.metrics.map((metric) => (
-        /* Reversed column keeps the value on top while the DOM keeps the
-           dt/dd order a definition list requires. */
         <div key={metric.label} className="flex flex-col-reverse gap-1.5">
           <dt className="type-label text-muted-foreground">{metric.label}</dt>
           <dd className="type-metric text-brand">{metric.value}</dd>
@@ -156,7 +156,7 @@ function Tags({ project }: { project: Project }) {
       {project.tags.map((tag) => (
         <li
           key={tag}
-          className="type-mono rounded-md border border-border px-2.5 py-1 text-xs text-muted-foreground"
+          className="type-mono rounded-md border border-border/80 bg-card/50 px-2.5 py-1 text-xs text-muted-foreground"
         >
           {tag}
         </li>
@@ -169,13 +169,13 @@ function Actions({ project, dict }: { project: Project; dict: ProjectsDict }) {
   if (!project.href && !project.repo) return null;
 
   return (
-    <div className="flex flex-wrap items-center gap-3 pt-1">
+    <div className="flex w-full flex-col items-stretch gap-3 pt-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
       {project.href ? (
         <a
           href={project.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="group/cta inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-brand-foreground transition-[background-color,transform] duration-200 ease-out hover:bg-brand-strong active:translate-y-px motion-reduce:transform-none"
+          className="group/cta inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold whitespace-nowrap text-brand-foreground transition-[background-color,transform] duration-150 ease-out hover:bg-brand-strong active:translate-y-px sm:w-auto sm:py-2.5 motion-reduce:transform-none"
         >
           {dict.viewLive}
           <ArrowUpRight
@@ -191,7 +191,7 @@ function Actions({ project, dict }: { project: Project; dict: ProjectsDict }) {
           href={project.repo}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-border-strong px-5 py-2.5 text-sm font-medium whitespace-nowrap text-foreground transition-colors duration-200 hover:border-brand-border hover:text-brand"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border-strong px-5 py-3 text-sm font-medium whitespace-nowrap text-foreground transition-colors duration-150 hover:border-brand-border hover:text-brand sm:w-auto sm:py-2.5"
         >
           <GitBranch className="h-4 w-4" aria-hidden="true" />
           {dict.viewRepo}

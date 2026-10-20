@@ -1,65 +1,110 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 
+import { HeroInteractiveBg } from "@/components/hero-interactive-bg";
 import type { Dictionary } from "@/dictionaries/types";
 
 /**
- * A typographic masthead. No image, so the headline has to do the work: it
- * runs near the full width of the container at display scale, with rules and
- * mono labels giving the section its structure the way a printed nameplate
- * would.
+ * Clean, open Hero Section with live interactive kinetic grid canvas.
  *
- * The three blocks are pushed apart to fill the viewport rather than stacked
- * with fixed gaps, so the type reads as a poster on a laptop and still
- * collapses sensibly on a phone.
+ * - No right-side panel: the interactive background canvas has room to breathe
+ *   and respond to the cursor across the entire stage.
+ * - Primary CTA + direct email (`caiobnstato@gmail.com`).
  */
 export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
   return (
-    <section id="top" className="px-6 md:px-8">
-      <div className="mx-auto flex min-h-[86svh] w-full max-w-7xl flex-col justify-between gap-14 pt-10 pb-16 md:pt-14">
+    <section
+      id="top"
+      className="relative overflow-hidden border-b border-border/70 px-5 sm:px-6 md:px-8"
+    >
+      <HeroInteractiveBg />
+
+      <div className="relative z-10 mx-auto flex min-h-[80svh] w-full max-w-6xl flex-col justify-between gap-10 pt-8 pb-14 sm:gap-14 sm:pt-10 sm:pb-20 md:min-h-[84svh] md:pt-16 md:pb-24">
+        {/* Top Meta & Status Pill Row */}
         <div
           style={{ "--enter-delay": "0ms" } as React.CSSProperties}
-          className="enter flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-border pb-5"
+          className="enter flex flex-wrap items-center justify-between gap-2.5 sm:gap-4"
         >
-          <span className="type-label text-foreground-subtle">{dict.role}</span>
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-card/85 px-3 py-1.5 backdrop-blur-md sm:px-3.5">
+            <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75 motion-reduce:hidden" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
+            </span>
+            <span className="type-label text-[10px] text-foreground sm:text-[11px]">
+              {dict.badge}
+            </span>
+          </div>
 
-          {/* Availability stated on the record, not badged with a blinking dot. */}
-          <span className="type-label flex items-center gap-3 text-brand">
-            <span className="h-px w-8 bg-brand" aria-hidden="true" />
-            {dict.badge}
-          </span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/70 px-3 py-1.5 text-muted-foreground backdrop-blur-md sm:px-3.5">
+            <MapPin
+              className="h-3.5 w-3.5 shrink-0 text-brand"
+              aria-hidden="true"
+            />
+            <span className="type-mono text-[11px] sm:text-xs">
+              {dict.role} · São Paulo, BR
+            </span>
+          </div>
         </div>
 
-        <h1
-          style={{ "--enter-delay": "80ms" } as React.CSSProperties}
-          className="enter type-hero max-w-[14ch] text-balance text-foreground"
-        >
-          {dict.heading}
-        </h1>
+        {/* Main Typographic Stage */}
+        <div className="flex flex-col items-start gap-6 py-2 sm:gap-8 sm:py-4">
+          <h1
+            style={{ "--enter-delay": "0ms" } as React.CSSProperties}
+            className="enter type-hero max-w-[16ch] text-balance text-foreground"
+          >
+            {dict.heading}
+          </h1>
 
-        <div className="grid gap-10 border-t border-border pt-8 md:grid-cols-12">
           <p
-            style={{ "--enter-delay": "160ms" } as React.CSSProperties}
-            className="enter type-lead text-pretty text-muted-foreground md:col-span-6 lg:col-span-5"
+            style={{ "--enter-delay": "120ms" } as React.CSSProperties}
+            className="enter type-lead max-w-2xl text-pretty text-muted-foreground"
           >
             {dict.subtitle}
           </p>
 
           <div
-            style={{ "--enter-delay": "240ms" } as React.CSSProperties}
-            className="enter flex md:col-span-5 md:col-start-8 md:justify-end"
+            style={{ "--enter-delay": "180ms" } as React.CSSProperties}
+            className="enter flex w-full flex-col items-stretch gap-3 pt-1 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5 sm:pt-2"
           >
             <a
               href="#work"
-              className="group inline-flex items-center gap-3 border-b-2 border-brand pb-1.5 font-display text-xl font-semibold tracking-tight text-foreground transition-colors duration-200 hover:text-brand md:text-2xl"
+              className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-brand-foreground transition-[background-color,transform] duration-150 ease-out hover:bg-brand-strong active:translate-y-px sm:w-auto motion-reduce:transform-none"
             >
-              {dict.ctaPrimary}
+              <span>{dict.ctaPrimary}</span>
               <ArrowRight
-                className="h-5 w-5 text-brand transition-transform duration-200 ease-out group-hover:translate-x-1 motion-reduce:transform-none"
+                className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1 motion-reduce:transform-none"
                 aria-hidden="true"
               />
             </a>
+
+            <a
+              href="mailto:caiobnstato@gmail.com"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border-strong bg-card/80 px-6 py-3.5 text-sm font-medium text-foreground backdrop-blur-md transition-colors duration-150 hover:border-brand-border hover:text-brand sm:w-auto"
+            >
+              <span>caiobnstato@gmail.com</span>
+            </a>
           </div>
         </div>
+
+        {/* Bottom Metrics Row */}
+        {dict.stats.length > 0 ? (
+          <dl
+            aria-label="Key figures"
+            style={{ "--enter-delay": "240ms" } as React.CSSProperties}
+            className="enter grid gap-4 border-t border-border/80 pt-8 sm:grid-cols-3 sm:gap-6 sm:pt-10"
+          >
+            {dict.stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="flex flex-col-reverse gap-1.5 rounded-xl border border-transparent p-1.5 transition-colors hover:border-border/60 hover:bg-card/40 sm:p-2"
+              >
+                <dt className="type-label text-muted-foreground">
+                  {stat.label}
+                </dt>
+                <dd className="type-metric text-foreground">{stat.value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
       </div>
     </section>
   );

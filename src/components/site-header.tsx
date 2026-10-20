@@ -3,14 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 
 import { MobileNav } from "@/components/mobile-nav";
-import { locales, localeLabels, type Locale } from "@/i18n/config";
+import { locales, localeLabels, localePath, type Locale } from "@/i18n/config";
 import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/dictionaries/types";
 
-/** How far the page scrolls before the bar detaches into a pill. */
-const DETACH_DISTANCE_PX = 40;
+/** How far the page scrolls before the bar detaches into a floating capsule. */
+const DETACH_DISTANCE_PX = 36;
 
-const MORPH = "420ms var(--ease-in-out)";
+const MORPH = "400ms var(--ease-in-out)";
 
 export function SiteHeader({
   lang,
@@ -20,7 +20,6 @@ export function SiteHeader({
   dict: Dictionary["nav"];
 }) {
   const [floating, setFloating] = useState(false);
-  /** A page loaded already scrolled would otherwise play the whole morph on arrival. */
   const [settled, setSettled] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -28,12 +27,6 @@ export function SiteHeader({
     const sentinel = sentinelRef.current;
     if (!sentinel) return;
 
-    /*
-     * A sentinel at the top of the document stands in for a scroll listener:
-     * once it leaves the viewport the page has passed DETACH_DISTANCE_PX. Same
-     * threshold, but the browser does the watching instead of a handler that
-     * runs on every scroll frame.
-     */
     const observer = new IntersectionObserver(
       ([entry]) => setFloating(!entry.isIntersecting),
       { threshold: 0 },
@@ -50,7 +43,6 @@ export function SiteHeader({
 
   return (
     <>
-      {/* Negative margin cancels the height, so this measures without occupying space. */}
       <div
         ref={sentinelRef}
         aria-hidden="true"
@@ -64,48 +56,57 @@ export function SiteHeader({
       <div
         className="sticky top-0 z-50 box-border"
         style={{
-          padding: floating ? "12px clamp(16px, 4vw, 48px)" : "0px",
+          padding: floating ? "10px clamp(12px, 3.5vw, 32px)" : "0px",
           transition: settled ? `padding ${MORPH}` : "none",
         }}
       >
         <header
-          className="mx-auto flex items-center justify-between gap-4 backdrop-blur-[14px] backdrop-saturate-150 md:gap-6"
+          className="mx-auto flex items-center justify-between gap-3 backdrop-blur-md backdrop-saturate-150 sm:gap-4 md:gap-6"
           style={{
             padding: floating
-              ? "10px 12px 10px 20px"
-              : "14px clamp(16px, 4vw, 48px)",
+              ? "8px 10px 8px 16px"
+              : "12px clamp(16px, 4vw, 48px)",
             borderRadius: floating ? "999px" : "0px",
-            maxWidth: floating ? "1000px" : "100%",
+            maxWidth: floating ? "1020px" : "100%",
             background: floating
-              ? "color-mix(in oklab, var(--card) 82%, transparent)"
-              : "color-mix(in oklab, var(--background) 88%, transparent)",
-            border: `1px solid ${floating ? "var(--border)" : "transparent"}`,
+              ? "color-mix(in oklab, var(--card-elevated) 86%, transparent)"
+              : "color-mix(in oklab, var(--background) 90%, transparent)",
+            border: `1px solid ${floating ? "var(--border-strong)" : "transparent"}`,
             boxShadow: floating
-              ? "0 14px 40px oklch(0 0 0 / 0.45)"
+              ? "0 16px 44px oklch(0 0 0 / 0.55)"
               : "0 1px 0 var(--border)",
             transition: settled
-              ? `padding ${MORPH}, border-radius ${MORPH}, max-width ${MORPH}, background 300ms ease, border-color 300ms ease, box-shadow ${MORPH}`
+              ? `padding ${MORPH}, border-radius ${MORPH}, max-width ${MORPH}, background 260ms ease, border-color 260ms ease, box-shadow ${MORPH}`
               : "none",
           }}
         >
           <a
             href="#top"
-            className="type-label shrink-0 text-sm font-bold text-foreground transition-colors hover:text-brand"
+            className="group flex shrink-0 items-center gap-2.5 text-foreground transition-colors hover:text-brand"
           >
-            CAIO STATO
+            <span
+              aria-hidden="true"
+              className="inline-block h-2 w-2 bg-brand transition-transform duration-200 group-hover:scale-125"
+            />
+            <span className="type-label text-xs font-bold tracking-[0.18em]">
+              CAIO STATO
+            </span>
           </a>
 
           <nav
             aria-label={dict.ariaLabel}
-            className="hidden items-center gap-7 md:flex"
+            className="hidden items-center gap-6 lg:gap-8 md:flex"
           >
-            {dict.items.map((item) => (
+            {dict.items.map((item, idx) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground"
+                className="group flex items-center gap-1.5 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground"
               >
-                {item.label}
+                <span className="type-mono text-[10px] text-brand/75 transition-colors group-hover:text-brand">
+                  0{idx + 1}
+                </span>
+                <span>{item.label}</span>
               </a>
             ))}
           </nav>
@@ -115,8 +116,12 @@ export function SiteHeader({
 
             <a
               href="#connect"
-              className="hidden rounded-full bg-brand px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-brand-foreground transition-[background-color,transform] duration-[160ms] ease-out hover:bg-brand-strong active:scale-[0.97] motion-reduce:transform-none md:inline-block"
+              className="hidden items-center gap-2 rounded-full bg-brand px-4 py-2 text-xs font-semibold tracking-wider whitespace-nowrap text-brand-foreground uppercase transition-[background-color,transform] duration-150 ease-out hover:bg-brand-strong active:scale-[0.97] motion-reduce:transform-none md:inline-flex"
             >
+              <span
+                aria-hidden="true"
+                className="h-1.5 w-1.5 rounded-full bg-brand-foreground"
+              />
               {dict.contact}
             </a>
 
@@ -130,26 +135,36 @@ export function SiteHeader({
 
 function LocaleSwitcher({ lang }: { lang: Locale }) {
   return (
-    <div className="type-label flex items-center gap-1.5 text-muted-foreground">
+    <nav
+      aria-label={lang === "pt-br" ? "Seleção de idioma" : "Language switcher"}
+      className="type-label flex items-center rounded-full border border-border bg-card/60 px-2 py-1 text-[10px] text-muted-foreground"
+    >
       {locales.map((locale, index) => (
-        <span key={locale} className="flex items-center gap-1.5">
+        <span key={locale} className="flex items-center">
           {index > 0 && (
-            <span aria-hidden="true" className="text-border-strong">
+            <span aria-hidden="true" className="mx-1 text-border-strong">
               /
             </span>
           )}
           <a
-            href={`/${locale}`}
+            href={localePath(locale)}
             aria-current={locale === lang ? "page" : undefined}
+            aria-label={
+              locale === "pt-br"
+                ? "PT - Português (Brasil)"
+                : "EN - English (US)"
+            }
             className={cn(
-              "transition-colors",
-              locale === lang ? "text-foreground" : "hover:text-foreground",
+              "rounded px-1.5 py-0.5 transition-colors",
+              locale === lang
+                ? "font-bold text-brand"
+                : "hover:text-foreground",
             )}
           >
             {localeLabels[locale]}
           </a>
         </span>
       ))}
-    </div>
+    </nav>
   );
 }

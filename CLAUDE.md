@@ -1,104 +1,43 @@
 @AGENTS
 
-# Caio Stato
+# Caio Stato — Portfolio Build Documentation
 
-## Dev tools description for building frontend engineer portfolio
+## Project Overview
 
-This project is a landing page for a frontend engineer portfolio.
-For it will be using skills such ui-ux-pro-max for font combinations; taste-skill for general design; impeccable for polishing; review-animations for animations; humanizer for reviewing text contents; find-animation-opportunities for finds animations gap; and apple-design for general design layout control;
+This repository is the bilingual (`pt-br` default at `/`, `en-us` at `/en-us`) portfolio for **Caio Stato**, Frontend & Fullstack Engineer specializing in **React**, **Next.js**, fintech payment rails, and scalable UI architecture.
 
-**Frontend Engineer | React & Next.js Architecture Expert**  
-📍 Sorocaba, SP, Brazil | 📞 +55 15 99631-9599 | ✉️ caio.stato@hotmail.com  
-🔗 [LinkedIn](https://linkedin.com/in/caiostato) | 🐙 [GitHub](https://github.com/caiostato) | 🌐 [Portfolio](https://caiostato.vercel.app)
-
----
-
-## 🎯 Summary
-
-Frontend Engineer with 4+ years of experience engineering high-performance web applications, fintech platforms, and scalable digital products using **React** and **Next.js**.
-
-Expertise in client-side performance optimization, modular software architecture (Clean Architecture/DDD), global state management (Redux, Zustand), and developing comprehensive UI design systems. Proven track record of collaborating with cross-functional teams to deliver intuitive, high-velocity interfaces that drive measurable operational efficiency gains of up to 30%.
+- **Location:** Sorocaba / São Paulo, SP, Brazil
+- **Email:** caiobnstato@gmail.com
+- **LinkedIn:** [https://linkedin.com/in/caiostato](https://linkedin.com/in/caiostato)
+- **GitHub:** [https://github.com/caiostato](https://github.com/caiostato)
 
 ---
 
-## 🛠️ Technical Skills
+## Design & Technical Decisions
 
-- **Core Technologies:** TypeScript, JavaScript (ES6+), React, Next.js, React Native, Vue.js, Tailwind CSS, Material UI, Shadcn UI, HTML5/CSS3, Sass, Node.js, PostgreSQL, GraphQL, REST APIs
-- **Architecture & State:** Redux Toolkit, Zustand, Context API, Storybook, Clean Architecture principles, Domain-Driven Design (DDD), Modularization
-- **Tooling, Testing & Analytics:** Jest, React Testing Library, Cypress, Playwright, Stripe Integration, Getnet Gateway Integration, Segment, Google Analytics, Sentry, Power BI, Git, GitHub Actions, Azure DevOps, Docker, Vercel, Agile/Scrum
+1. **Color Palette & Surface Contrast (`src/app/globals.css`)**
+   - Dark-only OKLCH token system pairing deep Matte Carbon (`--background: oklch(0.115 0.004 260)`) with alternating Slate-Graphite section contrast (`--surface-contrast: oklch(0.162 0.008 255)`) and lifted card surfaces (`--card: oklch(0.188 0.008 255)`).
+   - **International Signal Orange** (`--brand: oklch(0.7 0.195 42)`) serves as the high-visibility accent for telemetry, active toggles, and primary CTAs.
 
----
+2. **Interactive Hero Canvas (`src/components/hero-interactive-bg.tsx`)**
+   - Zero radial gradients. Uses an HTML5 `<canvas>` (`z-0`) that draws structural grid lines, spring-displaced intersection nodes that react to pointer movement, constellation connectors, and autonomous orthogonal Signal Orange data pulses.
 
-## 💼 Professional Experience
+3. **Live Mobile Project Previews (`src/components/site-preview.tsx` & `src/components/projects-section.tsx`)**
+   - Features live production systems (**Cerasos** at `https://cerasos.com.br/` and **Arkea Labs** at `https://arkealabs.com/`) alongside **AR3 Capital**.
+   - Each preview card is sized to a mobile portrait viewport (`max-w-[390px]`, fixed `h-[540px]` body) so live embedded sites render their mobile responsive views cleanly.
+   - Each card manages its own isolated state (`isArchMode`) to toggle between **Preview ao vivo (`<iframe>`)** and **Arquitetura (3-node system topology)** without shifting card height or affecting sibling cards.
 
-### **Frontend Engineer**
+4. **Interactive Architecture Sandbox (`src/components/live-sandbox-section.tsx`)**
+   - Allows visitors to simulate real event pipelines from Cerasos (WhatsApp Uazapi order ingress & Getnet PCI tokenization) and Arkea Labs (Bidirectional ERP sync).
 
-**Ziion Tech** | _Remote_ | **Feb 2025 – Present**
-
-- Engineered a scalable property showcase web application using **Next.js** and **Tailwind CSS**, optimizing Core Web Vitals and significantly reducing initial page load times.
-- Built a modular, reusable internal UI component library, accelerating future feature deployment velocity by an estimated 20%.
-- Developed a centralized administrative dashboard for employee management, streamlining operations and internal data visualization.
-- Implemented automated unit testing workflows using **Jest**, raising core code coverage and ensuring interface stability.
-
-### **Payment Systems / Fullstack Engineer**
-
-**E-Commerce & Payment Integration Project** | _Contract / Project_ | **Recent**
-
-- Engineered a secure, full-stack payment checkout flow using **Next.js** and **TypeScript**, integrating **Getnet’s** payment gateway from sandbox testing through to production deployment.
-- Built secure server-side API routes and handlers for token generation, PCI-compliant transaction processing, and database order state updates.
-- Implemented Getnet's custom loader scripts on the client, managing real-time transaction states, success callbacks, and user-facing error UI.
-- Designed asynchronous webhook notification handlers to safely process status updates and synchronize order fulfillment logic in real time.
-
-### **Frontend Engineer**
-
-**eAcademy** | _Remote_ | **Jun 2024 – Nov 2024**
-
-- Developed user-centered web applications for time scheduling and interactive calendar views using **Next.js** and **Shadcn UI**.
-- Built dynamic data dashboards utilizing **Redux** and **Framer Motion**, collaborating with backend engineers to map robust API contracts.
-- Automated frontend testing blocks within CI/CD pipelines, reducing manual verification efforts and securing stable software releases.
-- Enforced high code quality standards through detailed code reviews, comprehensive documentation, and clean architecture practices.
-
-### **Frontend Engineer**
-
-**AR3 Capital** | _Remote_ | **Oct 2022 – Feb 2024**
-
-- Spearheaded core client-side development to centralize internal financial services, maximizing platform stability and workflow speed.
-- Streamlined complex database lookups and internal reporting engines, driving a documented **30% increase in operational efficiency**.
-- Designed and published an enterprise-wide UI library via **Storybook**, ensuring strong brand and design consistency across 100% of views.
-- Maintained complete frontend project ownership in high-responsibility scenarios while aligning directly with cross-functional product squads.
-
-### **Software Engineer (Full Stack)**
-
-**RN3** | _Remote_ | **Apr 2023 – Oct 2023**
-
-- Successfully migrated legacy data modules from Angular to a modern, responsive stack powered by **Next.js** and **Node.js**.
-- Engineered secure full-stack features integrating commercial payment systems via **Stripe** and interactive business analytics tools.
-- Optimized complex **PostgreSQL** database queries, achieving a documented **25% performance improvement** across data retrieval pipelines.
-- Integrated dynamic **Power BI** visualization dashboards, reducing data processing overhead and aligning features with UX goals.
-
-### **Mobile Developer**
-
-**Hybank** | _Remote_ | **Sep 2021 – Sep 2022**
-
-- Developed cross-platform mobile fintech applications using **React Native**, delivering a seamless experience across iOS and Android.
-- Designed a custom mobile design system to scale new UI properties efficiently while cutting future layout development time.
-- Managed complex application state trees using **Redux**, connecting client views to transaction-heavy banking REST APIs.
-- Conducted thorough device usability and performance testing, reducing production errors and improving app store stability.
+5. **Clean Root Locale Routing (`src/proxy.ts` & `src/i18n/config.ts`)**
+   - Default language is `pt-br` served at `/` via `NextResponse.rewrite` (no `/pt-br` slug in the browser bar; visiting `/pt-br` redirects to `/`).
+   - English is served explicitly at `/en-us`.
 
 ---
 
-## 🎓 Education
+## Featured Production Projects
 
-**B.S. in Systems Analysis and Development**  
-_IFSP - Instituto Federal de São Paulo (Campinas/SP, Brazil)_
-
-- **Practical Thesis:** Easing public access to municipal healthcare infrastructure data.
-- **Graduated:** 2022
-
----
-
-## 🌐 Languages & Methodologies
-
-- **English:** Advanced (C1 Proficiency – Professional Working Competence)
-- **Portuguese:** Native / Bilingual
-- **Methodologies:** Agile Frameworks, Scrum, Clean Architecture, Domain-Driven Design (DDD), UI/UX System Optimization.md
+- **Cerasos (`https://cerasos.com.br/`):** Pharmacy sales platform running on WhatsApp via Uazapi with an automated Next.js order engine, Getnet PCI tokenization & webhook listeners, and an administrative analytics dashboard (`99.9%` reliability, `100%` orders automated).
+- **Arkea Labs (`https://arkealabs.com/`):** B2B/B2C digital infrastructure and software engineering platform with real-time bidirectional ERP connectors (SAP, Totvs, Omie, Bling), PostgreSQL/Redis resilience, and `99+` Core Web Vitals.
+- **AR3 Capital:** Consolidated internal financial platform and Storybook UI component library (`+30%` operational efficiency, `100%` views on shared UI library).
