@@ -65,8 +65,8 @@ export function SitePreview({
     const el = containerRef.current;
     if (!el) return;
     if (typeof IntersectionObserver === "undefined") {
-      setIsInView(true);
-      return;
+      const raf = requestAnimationFrame(() => setIsInView(true));
+      return () => cancelAnimationFrame(raf);
     }
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -105,7 +105,10 @@ export function SitePreview({
                 <Globe className="h-3 w-3 shrink-0 text-brand" aria-hidden="true" />
                 <span className="truncate">{url}</span>
               </span>
-              <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-70 transition-transform group-hover/url:translate-x-0.5 group-hover/url:-translate-y-0.5 group-hover/url:opacity-100" aria-hidden="true" />
+              <ArrowUpRight
+                className="h-3.5 w-3.5 shrink-0 opacity-70 transition-transform group-hover/url:translate-x-0.5 group-hover/url:-translate-y-0.5 group-hover/url:opacity-100"
+                aria-hidden="true"
+              />
             </a>
           ) : (
             <span className="type-mono min-w-0 flex-1 truncate px-1 text-xs text-foreground-subtle">
@@ -399,10 +402,10 @@ function CleanArchitecturePreview({
               key={m.label}
               className="rounded-lg border border-border bg-background/60 px-2.5 py-2 sm:px-3 sm:py-2.5"
             >
-              <div className="font-mono text-base font-bold text-brand">
+              <div className="font-mono text-sm font-bold text-brand sm:text-base">
                 {m.value}
               </div>
-              <div className="type-label mt-1 text-[9px] text-muted-foreground">
+              <div className="mt-0.5 text-[11px] leading-tight text-muted-foreground">
                 {m.label}
               </div>
             </div>
