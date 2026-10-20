@@ -22,21 +22,18 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "404 // ROUTE_NOT_FOUND | Caio Stato",
-  description: "Page not found / Coordenada não encontrada",
+  title: "404 — Página não encontrada | Caio Stato",
+  description: "Página não encontrada / Page not found",
 };
 
 export default function RootNotFound() {
   return (
-    <html
-      lang="pt-BR"
-      className={`dark bg-background font-sans ${geist.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    <div
+      className={`dark bg-background text-foreground font-sans antialiased min-h-dvh flex items-center justify-center p-6 ${geist.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="antialiased min-h-dvh bg-background text-foreground flex items-center justify-center">
-        <main id="main-content" tabIndex={-1} className="relative flex min-h-dvh w-full items-center justify-center outline-none">
-          <NotFoundView />
-        </main>
-      </body>
-    </html>
+      <main id="main-content" tabIndex={-1} className="relative flex w-full items-center justify-center outline-none">
+        <NotFoundView />
+      </main>
+    </div>
   );
 }
