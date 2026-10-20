@@ -41,11 +41,12 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-card-elevated: var(--card-elevated);
+  --color-surface-contrast: var(--surface-contrast);
   --color-foreground: var(--foreground);
   --color-foreground-subtle: var(--foreground-subtle);
   --color-background: var(--background);
 
-  /* Brand highlight — the one saturated colour in the system. */
+  /* Brand highlight — International Signal Orange. */
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
   --color-brand-foreground: var(--brand-foreground);
@@ -75,66 +76,65 @@
 .dark {
   color-scheme: dark;
 
-  --background: oklch(0.145 0.006 250);
+  /* Matte carbon & contrasting slate-graphite surfaces */
+  --background: oklch(0.115 0.004 260);
+  --surface-contrast: oklch(0.162 0.008 255);
   --foreground: oklch(0.985 0 0);
-  --foreground-subtle: oklch(0.87 0.004 250);
+  --foreground-subtle: oklch(0.86 0.005 260);
 
-  --card: oklch(0.185 0.006 250);
-  --card-elevated: oklch(0.215 0.007 250);
+  --card: oklch(0.188 0.008 255);
+  --card-elevated: oklch(0.228 0.01 255);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.185 0.006 250);
+  --popover: oklch(0.188 0.008 255);
   --popover-foreground: oklch(0.985 0 0);
 
   --primary: oklch(0.965 0 0);
-  --primary-foreground: oklch(0.175 0.006 250);
-  --secondary: oklch(0.269 0.006 250);
+  --primary-foreground: oklch(0.135 0.005 260);
+  --secondary: oklch(0.245 0.008 255);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.245 0.006 250);
-  --muted-foreground: oklch(0.7 0.008 250);
+  --muted: oklch(0.225 0.008 255);
+  --muted-foreground: oklch(0.7 0.008 255);
 
   /* shadcn semantics: `accent` is the neutral hover surface, not a highlight. */
-  --accent: oklch(0.269 0.006 250);
+  --accent: oklch(0.245 0.008 255);
   --accent-foreground: oklch(0.985 0 0);
 
-  /* Brand: 8.9:1 on --background, safe for text at any size. */
-  --brand: oklch(0.78 0.17 152);
-  --brand-strong: oklch(0.86 0.15 152);
-  --brand-foreground: oklch(0.18 0.05 152);
-  --brand-subtle: oklch(0.78 0.17 152 / 0.12);
-  --brand-border: oklch(0.78 0.17 152 / 0.4);
+  /* Brand: International Signal Orange — high-visibility telemetry & CTAs. */
+  --brand: oklch(0.7 0.195 42);
+  --brand-strong: oklch(0.76 0.185 45);
+  --brand-foreground: oklch(0.13 0.02 42);
+  --brand-subtle: oklch(0.7 0.195 42 / 0.14);
+  --brand-border: oklch(0.7 0.195 42 / 0.45);
 
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --border-strong: oklch(1 0 0 / 18%);
+  --border: oklch(1 0 0 / 13%);
+  --border-strong: oklch(1 0 0 / 22%);
   --input: oklch(1 0 0 / 15%);
   --ring: var(--brand);
 
-  --chart-1: oklch(0.78 0.17 152);
-  --chart-2: oklch(0.65 0.13 152);
+  --chart-1: oklch(0.7 0.195 42);
+  --chart-2: oklch(0.62 0.16 42);
   --chart-3: oklch(0.556 0 0);
   --chart-4: oklch(0.439 0 0);
   --chart-5: oklch(0.269 0 0);
 
-  --sidebar: oklch(0.185 0.006 250);
+  --sidebar: oklch(0.148 0.005 260);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: var(--brand);
   --sidebar-primary-foreground: var(--brand-foreground);
-  --sidebar-accent: oklch(0.269 0.006 250);
+  --sidebar-accent: oklch(0.22 0.006 260);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-border: oklch(1 0 0 / 11%);
   --sidebar-ring: var(--brand);
 
-  --radius: 0.625rem;
+  --radius: 0.5rem;
 
-  /* Holds the hero entrance until the curtain has started to part. */
-  --intro-offset: 980ms;
+  /* Instant entry — no opening curtain delay. */
+  --intro-offset: 0ms;
 
-  /*
-   * Scroll reveal, dialled up so the effect is unmistakable while testing.
-   * Production values: 500ms and 12px.
-   */
-  --reveal-duration: 1200ms;
-  --reveal-distance: 48px;
+  /* Snappy, high-precision mechanical reveal transitions. */
+  --reveal-duration: 500ms;
+  --reveal-distance: 16px;
 }
 
 @layer base {
@@ -147,50 +147,60 @@
   html {
     @apply font-sans;
     scroll-behavior: smooth;
-    /* Floating bar bottoms out at 5rem from md up. Keep anchors clear of it. */
-    scroll-padding-top: 6rem;
+    /* Clears the sticky header when jumping to section anchors. */
+    scroll-padding-top: 5rem;
   }
   /* Mono labels are set in caps at small sizes — tighten the default tracking. */
   .font-mono {
     font-feature-settings: 'ss02' on, 'cv01' on;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand;
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  [role="tab"]:focus-visible,
+  [role="link"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
   }
 }
 
 @layer components {
-  /*
-   * Tracking and leading are size-specific: large type reads too loose at
-   * default tracking, small type too tight. One value for all sizes is wrong
-   * somewhere, so each step carries its own pair.
-   */
-  /*
-   * Poster scale, for the one headline on the page that is allowed to shout.
-   * Roughly 5x body at the top end, with tracking pulled in hard: large type
-   * reads loose at the tracking that suits body copy.
-   */
   .type-hero {
     font-family: var(--font-display);
-    font-size: clamp(2.875rem, 0.9rem + 7.8vw, 7.5rem);
+    font-size: clamp(2.125rem, 1.1rem + 4.8vw, 5.25rem);
     font-weight: 700;
-    line-height: 0.9;
-    letter-spacing: -0.05em;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  }
+
+  @media (min-width: 768px) {
+    .type-hero {
+      line-height: 0.94;
+    }
   }
 
   .type-display {
     font-family: var(--font-display);
-    font-size: clamp(2.75rem, 1.6rem + 4.6vw, 4.75rem);
+    font-size: clamp(1.95rem, 1.25rem + 3.8vw, 4.25rem);
     font-weight: 700;
-    line-height: 0.98;
+    line-height: 1.02;
     letter-spacing: -0.035em;
   }
 
   .type-h2 {
     font-family: var(--font-display);
-    font-size: clamp(1.875rem, 1.35rem + 2.1vw, 2.75rem);
+    font-size: clamp(1.5rem, 1.2rem + 1.8vw, 2.5rem);
     font-weight: 700;
-    line-height: 1.06;
+    line-height: 1.1;
     letter-spacing: -0.025em;
   }
 
@@ -203,14 +213,14 @@
   }
 
   .type-lead {
-    font-size: clamp(1.0625rem, 0.98rem + 0.35vw, 1.1875rem);
-    line-height: 1.6;
+    font-size: clamp(1.03125rem, 0.96rem + 0.3vw, 1.15rem);
+    line-height: 1.62;
     letter-spacing: -0.005em;
   }
 
   .type-body {
     font-size: 0.9375rem;
-    line-height: 1.7;
+    line-height: 1.68;
   }
 
   /* Mono eyebrows/labels: small caps text needs positive tracking to breathe. */
@@ -218,7 +228,7 @@
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     font-weight: 500;
-    line-height: 1;
+    line-height: 1.35;
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
@@ -233,32 +243,15 @@
   /* Metrics are the loudest numbers on the page — display weight, mono figures. */
   .type-metric {
     font-family: var(--font-mono);
-    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+    font-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.5rem);
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
     font-variant-numeric: tabular-nums;
   }
 }
 
 @layer utilities {
-  /*
-   * Scroll reveal.
-   *
-   * Driven by IntersectionObserver rather than a `view()` scroll timeline.
-   * The timeline version was elegant and cost no JS, but it only runs in
-   * Chromium and Safari 26, and its behaviour could not be verified across
-   * the browsers this site actually has to work in. An observer runs
-   * everywhere and puts the trigger point somewhere explicit.
-   *
-   * The hiding rules are gated behind `[data-reveal="on"]`, an attribute set
-   * by a blocking script in the document head. No script, no hidden content:
-   * the page degrades to fully visible rather than fully blank.
-   *
-   * Trigger: each `.reveal` element fires on its own, when its top edge
-   * crosses 80% of the viewport height (see rootMargin in scroll-reveal.tsx).
-   * It is per element, not per section.
-   */
   [data-reveal="on"] .reveal {
     opacity: 0;
     transform: translateY(var(--reveal-distance));
@@ -274,47 +267,40 @@
     will-change: auto;
   }
 
-  /* Siblings in one row would otherwise all trip at the same scroll position. */
   [data-reveal="on"] .reveal-stagger > *:nth-child(2) {
-    transition-delay: 120ms;
+    transition-delay: 80ms;
   }
   [data-reveal="on"] .reveal-stagger > *:nth-child(3) {
-    transition-delay: 240ms;
+    transition-delay: 160ms;
   }
   [data-reveal="on"] .reveal-stagger > *:nth-child(4) {
-    transition-delay: 360ms;
+    transition-delay: 240ms;
   }
 
   @media (prefers-reduced-motion: reduce) {
     [data-reveal="on"] .reveal {
       transform: none;
-      transition: opacity 240ms linear;
+      transition: opacity 200ms linear;
     }
     [data-reveal="on"] .reveal-stagger > * {
       transition-delay: 0ms;
     }
   }
 
-  /* Load-time entrance for above-the-fold content, stepped via --enter-delay. */
   .enter {
-    animation: reveal-up 480ms var(--ease-out) both;
+    animation: reveal-up 420ms var(--ease-out) both;
     animation-delay: calc(var(--intro-offset, 0ms) + var(--enter-delay, 0ms));
   }
 
-  /*
-   * Reduced motion degrades to a fade rather than to nothing: the sequencing
-   * still reads, only the travel is dropped.
-   */
   @media (prefers-reduced-motion: reduce) {
     .reveal,
     .enter {
       animation-name: reveal-fade;
     }
     .enter {
-      animation-duration: 240ms;
+      animation-duration: 200ms;
     }
   }
-
 }
 
 @keyframes reveal-up {
@@ -337,163 +323,19 @@
   }
 }
 
-/* ---------------------------------------------------------------------- *
- * Opening sequence
- *
- * A split curtain: the wordmark rises out of a mask, a rule draws under it,
- * then the two panels part to hand the page over. Everything is transform
- * and opacity, and the whole overlay takes itself out of the layer stack
- * when it is done so it can never swallow a click.
- * ---------------------------------------------------------------------- */
-
-.intro {
-  --intro-panels: 620ms;
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-  animation: intro-retire 1ms linear 1500ms both;
-}
-
-/* The two halves that part to reveal the page. */
-.intro-panel {
-  position: absolute;
-  inset-inline: 0;
-  height: 50.5%;
-  background-color: var(--background);
-  animation-duration: var(--intro-panels);
-  animation-timing-function: var(--ease-in-out);
-  animation-delay: 820ms;
-  animation-fill-mode: both;
-}
-
-.intro-panel-top {
-  top: 0;
-  animation-name: intro-panel-up;
-}
-
-.intro-panel-bottom {
-  bottom: 0;
-  animation-name: intro-panel-down;
-}
-
-/* Wraps the wordmark and its rule so both leave together. */
-.intro-mark {
-  position: relative;
-  z-index: 1;
-  animation: intro-mark-out 320ms var(--ease-out) 820ms both;
-}
-
-.intro-word {
-  display: flex;
-  align-items: center;
-  gap: 0.16em;
-}
-
-/* Each letter is clipped by its own box and rides up into view. */
-.intro-letter {
-  display: inline-block;
-  overflow: hidden;
-  clip-path: inset(0 0 0 0);
-}
-
-.intro-letter > span {
-  display: inline-block;
-  animation: intro-letter-up 560ms var(--ease-out) both;
-  animation-delay: calc(80ms + var(--letter-index, 0) * 38ms);
-}
-
-.intro-rule {
-  transform-origin: left center;
-  animation: intro-rule-draw 420ms var(--ease-out) 520ms both;
-}
-
-@keyframes intro-letter-up {
-  from {
-    transform: translateY(110%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes intro-rule-draw {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes intro-mark-out {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes intro-panel-up {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100%);
-  }
-}
-
-@keyframes intro-panel-down {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(100%);
-  }
-}
-
-/* Drops the finished overlay out of the way for good. */
-@keyframes intro-retire {
-  to {
-    visibility: hidden;
-  }
-}
-
-/*
- * Reduced motion gets the same handover without the travel: a short fade off
- * the cover, and the hero starts immediately rather than waiting on a curtain
- * that is no longer moving.
- */
-@media (prefers-reduced-motion: reduce) {
-  .intro {
-    animation-delay: 400ms;
-  }
-  .intro-panel {
-    animation-name: reveal-fade;
-    animation-direction: reverse;
-    animation-duration: 240ms;
-    animation-delay: 160ms;
-  }
-  .intro-mark {
-    animation: reveal-fade 160ms linear both;
-    animation-direction: reverse;
-  }
-  .intro-letter > span,
-  .intro-rule {
-    animation: none;
-  }
-  :root {
-    --intro-offset: 0ms;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+  .animate-ping,
+  .animate-pulse,
+  .animate-bounce,
+  .animate-spin {
+    animation: none !important;
   }
 }

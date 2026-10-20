@@ -5,6 +5,7 @@ import { Space_Grotesk, Geist, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import { cn } from "@/lib/utils";
 import { htmlLangMap, isLocale, locales } from "@/i18n/config";
+import { CookieBanner } from "@/components/cookie-banner";
 import { getDictionary } from "./dictionaries";
 
 // Three families, three jobs: Geist reads body copy, Space Grotesk carries the
@@ -77,6 +78,7 @@ export default async function RootLayout({
 }>) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
+  const dict = await getDictionary(lang);
 
   return (
     <html
@@ -108,8 +110,18 @@ export default async function RootLayout({
         </noscript>
       </head>
       <body className="antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-brand focus:px-4 focus:py-2.5 focus:font-mono focus:text-xs focus:font-bold focus:tracking-wider focus:text-brand-foreground focus:shadow-2xl focus:outline-2 focus:outline-offset-2 focus:outline-foreground"
+        >
+          {lang === "pt-br"
+            ? "Pular para o conteúdo principal"
+            : "Skip to main content"}
+        </a>
         {children}
-        {process.env.NODE_ENV === "production" && <Analytics />}
+        <CookieBanner lang={lang} dict={dict.cookieBanner}>
+          {process.env.NODE_ENV === "production" && <Analytics />}
+        </CookieBanner>
       </body>
     </html>
   );

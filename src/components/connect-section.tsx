@@ -7,7 +7,7 @@ import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/dictionaries/types";
 
-const EMAIL = "caio.stato@hotmail.com";
+const EMAIL = "caiobnstato@gmail.com";
 
 export function ConnectSection({ dict }: { dict: Dictionary["connect"] }) {
   const [copied, setCopied] = useState(false);
@@ -23,8 +23,6 @@ export function ConnectSection({ dict }: { dict: Dictionary["connect"] }) {
     try {
       await navigator.clipboard.writeText(EMAIL);
     } catch {
-      // Clipboard is unavailable over http or when permission is denied —
-      // fall back to the mail client rather than failing silently.
       window.location.href = `mailto:${EMAIL}`;
       return;
     }
@@ -39,13 +37,8 @@ export function ConnectSection({ dict }: { dict: Dictionary["connect"] }) {
       id="connect"
       rhythm="loud"
       width="narrow"
-      className="overflow-hidden border-t border-border"
+      className="overflow-hidden"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-1/2 -z-10 h-80 w-[48rem] -translate-x-1/2 translate-y-1/3 rounded-full bg-brand/[0.06] blur-[100px]"
-      />
-
       <div className="reveal flex flex-col items-center gap-6 text-center">
         <h2 className="type-display text-balance text-foreground">
           {dict.heading}
@@ -55,10 +48,10 @@ export function ConnectSection({ dict }: { dict: Dictionary["connect"] }) {
           {dict.body}
         </p>
 
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-2 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
           <a
             href={`mailto:${EMAIL}`}
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-brand-foreground transition-[background-color,transform] duration-200 ease-out hover:bg-brand-strong active:translate-y-px motion-reduce:transform-none"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-brand-foreground transition-[background-color,transform] duration-150 ease-out hover:bg-brand-strong active:translate-y-px sm:w-auto motion-reduce:transform-none"
           >
             <Mail className="h-4 w-4" aria-hidden="true" />
             {dict.emailCta}
@@ -68,10 +61,8 @@ export function ConnectSection({ dict }: { dict: Dictionary["connect"] }) {
             type="button"
             onClick={handleCopy}
             aria-live="polite"
-            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border-strong px-6 py-3 text-sm font-medium text-foreground transition-[color,border-color,transform] duration-200 ease-out hover:border-brand-border hover:text-brand active:translate-y-px motion-reduce:transform-none"
+            className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-border-strong px-6 py-3.5 text-sm font-medium text-foreground transition-[color,border-color,transform] duration-150 ease-out hover:border-brand-border hover:text-brand active:translate-y-px sm:w-auto motion-reduce:transform-none"
           >
-            {/* Both icons stay mounted and cross-fade in place, so the label
-                never shifts when the state flips. */}
             <span className="relative inline-flex h-4 w-4 shrink-0">
               <Copy
                 aria-hidden="true"

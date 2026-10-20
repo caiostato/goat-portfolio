@@ -23,7 +23,7 @@ const dictionary: Dictionary = {
     heading: "React and Next.js architecture that holds up under load",
     subtitle:
       "Four years on fintech platforms and digital products, spent on render cost, bundle size, and code that survives the next engineer.",
-    ctaPrimary: "See the work",
+    ctaPrimary: "See live work",
     role: "Frontend Engineer",
     stats: [
       { value: "4+", label: "Years shipping frontend" },
@@ -32,9 +32,9 @@ const dictionary: Dictionary = {
     ],
   },
   projects: {
-    heading: "Selected projects",
+    heading: "Selected projects & live deployments",
     description:
-      "Two projects where the frontend work had a number attached to it.",
+      "Production systems and web platforms running live in the wild, paired with measurable architecture outcomes.",
     items: [
       {
         title: "Cerasos sales platform",
@@ -42,11 +42,25 @@ const dictionary: Dictionary = {
           "Pharmacy sales platform that runs on WhatsApp. Customers message, the Uazapi integration answers and creates the order, and Getnet handles payment from tokenization through the webhook that confirms it. An admin dashboard sits on top for order tracking, sales figures, and customer ratings.",
         role: "Fullstack Engineer",
         period: "2025",
+        href: "https://cerasos.com.br/",
         metrics: [
           { value: "99.9%", label: "System reliability" },
           { value: "100%", label: "Orders automated" },
         ],
         tags: ["Next.js", "TypeScript", "Getnet", "Uazapi"],
+      },
+      {
+        title: "Arkea Labs digital infrastructure",
+        description:
+          "Software engineering and B2B/B2C digital infrastructure platform. Built with high-performance web architecture, real-time bidirectional ERP connectors (SAP, Totvs, Omie, Bling), payment gateway orchestration, and fault-tolerant edge delivery.",
+        role: "Software Engineer",
+        period: "2025 - 2026",
+        href: "https://arkealabs.com/",
+        metrics: [
+          { value: "99+", label: "Core Web Vitals" },
+          { value: "24/7", label: "Real-time ERP sync" },
+        ],
+        tags: ["Next.js", "TypeScript", "PostgreSQL", "Redis"],
       },
       {
         title: "AR3 Capital financial platform",
@@ -61,10 +75,12 @@ const dictionary: Dictionary = {
         tags: ["React", "Storybook", "TypeScript", "REST APIs"],
       },
     ],
-    viewLive: "Visit site",
+    viewLive: "Open live site",
     viewRepo: "Source",
-    liveLabel: "Live",
-    privateLabel: "Private work",
+    liveLabel: "Live demo",
+    privateLabel: "Private system",
+    interactivePreviewLabel: "Live preview",
+    architecturePreviewLabel: "Architecture",
     empty: "Projects are being written up. Check back shortly.",
   },
   experience: {
@@ -211,7 +227,91 @@ const dictionary: Dictionary = {
       },
       { label: "How I work", href: "#philosophy", external: false },
     ],
+    privacy: "Privacy Policy",
+    cookieSettings: "Cookie Settings",
     copyright: "© 2026 Caio Stato",
+  },
+  cookieBanner: {
+    badge: "PRIVACY // TELEMETRY",
+    title: "Telemetry & Cookie Preferences",
+    message:
+      "This portfolio uses privacy-friendly anonymous telemetry (Vercel Analytics) to measure performance, load times, and Core Web Vitals. No personally identifiable information, persistent IP addresses, or cross-site advertising trackers are used.",
+    accept: "Accept",
+    decline: "Decline",
+    learnMore: "Privacy Policy",
+  },
+  privacy: {
+    metaTitle: "Privacy Policy | Caio Stato",
+    metaDescription:
+      "Full transparency on telemetry, cookies, and data practices across Caio Stato's portfolio. Compliant with LGPD and GDPR standards.",
+    badge: "COMPLIANCE // LGPD & GDPR",
+    title: "Privacy Policy",
+    lastUpdated: "Last updated: March 2026",
+    intro:
+      "Privacy and transparency are core foundations of sound software engineering. This document details how this site collects, processes, and protects data during your visit, adhering strictly to the Brazilian General Data Protection Law (LGPD - Law 13.709/2018) and the European General Data Protection Regulation (GDPR - Regulation EU 2016/679).",
+    backToHome: "Return to Home",
+    manageCookiesCta: "Reconfigure cookie preferences",
+    sections: [
+      {
+        id: "data-collection",
+        title: "1. Data Collection & Telemetry",
+        paragraphs: [
+          "This portfolio practices strict data minimization (Privacy by Design). We do not require account creation, logins, or submission of sensitive personal data.",
+          "Only when you explicitly provide consent, we utilize Vercel Analytics to monitor purely technical application performance metrics, including:",
+        ],
+        bulletPoints: [
+          "Performance metrics and Core Web Vitals (LCP, FID/INP, CLS);",
+          "Visited routes and pages within the domain;",
+          "Device category, approximate viewport resolution, and browser version;",
+          "Country of origin (derived without retaining your raw IP address).",
+        ],
+      },
+      {
+        id: "purpose-legal-basis",
+        title: "2. Purpose & Legal Basis (LGPD / GDPR)",
+        paragraphs: [
+          "The processing of technical data serves solely to evaluate operational stability, responsiveness, and performance across diverse environments.",
+          "Under LGPD (Art. 7, I) and GDPR (Art. 6(1)(a)), telemetry metric collection relies entirely on your explicit, freely given consent. For strictly essential functionality (such as persisting your consent and locale preference), we rely on legitimate interest under LGPD (Art. 7, IX).",
+        ],
+      },
+      {
+        id: "cookies-storage",
+        title: "3. Local Storage & Cookies",
+        paragraphs: [
+          "This site does not use third-party tracking cookies, social media pixels, or behavioral advertising trackers.",
+          "We exclusively leverage the browser's local storage (localStorage) for client-side state preferences:",
+        ],
+        bulletPoints: [
+          "caio_consent_analytics: persists your preference ('granted' or 'denied') for the telemetry banner;",
+          "Locale preference: represented cleanly in the canonical URL path (/ or /en-us).",
+        ],
+      },
+      {
+        id: "user-rights",
+        title: "4. User Rights",
+        paragraphs: [
+          "In full compliance with LGPD Article 18 and GDPR Articles 15 through 22, you retain complete authority over your preferences and data:",
+        ],
+        bulletPoints: [
+          "Revoke previously granted consent at any time via the cookie settings button in the footer;",
+          "Clear saved preferences directly in your browser by clearing cache and localStorage in developer tools;",
+          "Request verification or additional clarification regarding infrastructure architecture.",
+        ],
+      },
+      {
+        id: "security",
+        title: "5. Security & Data Retention",
+        paragraphs: [
+          "All connections are secured using end-to-end HTTPS/TLS 1.3 encryption with strict Content Security policies. Aggregated statistical data contains no persistent user identifiers and is processed across Vercel's global edge infrastructure.",
+        ],
+      },
+    ],
+    contact: {
+      title: "6. Data Controller & Contact Information",
+      text: "For questions, feedback, or inquiries regarding privacy and technical governance of this project, reach out directly to the engineer:",
+      email: "caiobnstato@gmail.com",
+      buttonLabel: "Send email",
+    },
   },
 };
 

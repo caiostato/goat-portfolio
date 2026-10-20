@@ -32,7 +32,10 @@ export function ScrollReveal() {
 
     // No IntersectionObserver (very old browsers): show everything rather
     // than leaving the page blank.
-    if (typeof IntersectionObserver === "undefined") {
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       for (const target of targets) target.setAttribute("data-revealed", "");
       return;
     }

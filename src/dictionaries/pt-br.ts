@@ -23,7 +23,7 @@ const dictionary: Dictionary = {
     heading: "Arquitetura React e Next.js que aguenta o tranco",
     subtitle:
       "Quatro anos em plataformas fintech e produtos digitais, gastos em custo de render, tamanho de bundle e código que sobrevive ao próximo engenheiro.",
-    ctaPrimary: "Ver os projetos",
+    ctaPrimary: "Ver projetos no ar",
     role: "Frontend Engineer",
     stats: [
       { value: "4+", label: "Anos em frontend" },
@@ -32,9 +32,9 @@ const dictionary: Dictionary = {
     ],
   },
   projects: {
-    heading: "Projetos selecionados",
+    heading: "Projetos selecionados e sistemas no ar",
     description:
-      "Dois projetos em que o trabalho de frontend veio com número junto.",
+      "Sistemas em produção e plataformas web rodando ao vivo, com métricas reais de arquitetura e operação.",
     items: [
       {
         title: "Plataforma de vendas Cerasos",
@@ -42,11 +42,25 @@ const dictionary: Dictionary = {
           "Plataforma de vendas para farmácias que roda no WhatsApp. O cliente manda mensagem, a integração via Uazapi responde e cria o pedido, e a Getnet cuida do pagamento da tokenização até o webhook que confirma. Por cima disso, um dashboard administrativo com rastreamento de pedidos, números de vendas e avaliações.",
         role: "Fullstack Engineer",
         period: "2025",
+        href: "https://cerasos.com.br/",
         metrics: [
           { value: "99,9%", label: "Confiabilidade do sistema" },
           { value: "100%", label: "Pedidos automatizados" },
         ],
         tags: ["Next.js", "TypeScript", "Getnet", "Uazapi"],
+      },
+      {
+        title: "Arkea Labs infraestrutura digital",
+        description:
+          "Plataforma de engenharia de software e infraestrutura digital para operações B2B e B2C. Desenvolvida com arquitetura web de alta performance, conectores bidirecionais de ERP em tempo real (SAP, Totvs, Omie, Bling), orquestração de gateways de pagamento e entrega resiliente na borda.",
+        role: "Software Engineer",
+        period: "2025 - 2026",
+        href: "https://arkealabs.com/",
+        metrics: [
+          { value: "99+", label: "Core Web Vitals" },
+          { value: "24/7", label: "Sincronização de ERP" },
+        ],
+        tags: ["Next.js", "TypeScript", "PostgreSQL", "Redis"],
       },
       {
         title: "Plataforma financeira AR3 Capital",
@@ -61,10 +75,12 @@ const dictionary: Dictionary = {
         tags: ["React", "Storybook", "TypeScript", "REST APIs"],
       },
     ],
-    viewLive: "Acessar site",
+    viewLive: "Acessar site ao vivo",
     viewRepo: "Código",
-    liveLabel: "No ar",
-    privateLabel: "Projeto fechado",
+    liveLabel: "No ar (Live)",
+    privateLabel: "Sistema privado",
+    interactivePreviewLabel: "Preview ao vivo",
+    architecturePreviewLabel: "Arquitetura",
     empty: "Projetos em preparação. Volte em breve.",
   },
   experience: {
@@ -211,7 +227,91 @@ const dictionary: Dictionary = {
       },
       { label: "Como eu trabalho", href: "#philosophy", external: false },
     ],
+    privacy: "Privacidade",
+    cookieSettings: "Preferências de cookies",
     copyright: "© 2026 Caio Stato",
+  },
+  cookieBanner: {
+    badge: "PRIVACIDADE // TELEMETRIA",
+    title: "Preferências de telemetria e cookies",
+    message:
+      "Este portfólio utiliza telemetria anônima (Vercel Analytics) para medir tempos de resposta, estabilidade e Core Web Vitals. Nenhum dado pessoal, endereço IP persistente ou rastreador comercial é utilizado.",
+    accept: "Aceitar",
+    decline: "Recusar",
+    learnMore: "Política de Privacidade",
+  },
+  privacy: {
+    metaTitle: "Política de Privacidade | Caio Stato",
+    metaDescription:
+      "Transparência total sobre telemetria técnica, cookies e governança de dados no portfólio de Caio Stato. Em estrita conformidade com a LGPD e o GDPR.",
+    badge: "CONFORMIDADE // LGPD & GDPR",
+    title: "Política de Privacidade",
+    lastUpdated: "Última atualização: Março de 2026",
+    intro:
+      "A privacidade e a transparência técnica são princípios fundamentais de engenharia de software de alta qualidade. Este documento detalha como este site coleta, processa e protege qualquer dado durante a sua navegação, em estrita observância à Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018) e ao Regulamento Geral sobre a Proteção de Dados (GDPR - Regulamento UE 2016/679).",
+    backToHome: "Voltar ao início",
+    manageCookiesCta: "Reconfigurar preferências de cookies",
+    sections: [
+      {
+        id: "data-collection",
+        title: "1. Coleta de Dados e Telemetria",
+        paragraphs: [
+          "Este portfólio adota a filosofia de minimização de dados (Privacy by Design). Não exigimos criação de conta, login ou fornecimento de informações pessoais sensíveis para navegação.",
+          "Quando você consente expressamente, utilizamos o Vercel Analytics para monitoramento de métricas puramente técnicas e de desempenho da aplicação, tais como:",
+        ],
+        bulletPoints: [
+          "Métricas de performance e Core Web Vitals (LCP, FID/INP, CLS);",
+          "Páginas visitadas e rotas acessadas dentro do domínio;",
+          "Tipo de dispositivo, resolução aproximada e versão do navegador;",
+          "País de origem da requisição (derivado sem armazenamento do endereço IP completo).",
+        ],
+      },
+      {
+        id: "purpose-legal-basis",
+        title: "2. Finalidade e Bases Legais (LGPD / GDPR)",
+        paragraphs: [
+          "O tratamento de dados técnicos tem como única finalidade aferir a integridade operacional, responsividade e estabilidade do portfólio em diferentes ambientes.",
+          "Sob a LGPD (Art. 7º, I) e o GDPR (Art. 6º, 1, a), a coleta de métricas de telemetria baseia-se exclusivamente no seu consentimento livre, informado e inequívoco. Para funcionalidades estritamente essenciais (como a persistência da sua escolha de idioma e de consentimento), amparamo-nos no Legítimo Interesse (LGPD Art. 7º, IX).",
+        ],
+      },
+      {
+        id: "cookies-storage",
+        title: "3. Armazenamento Local e Cookies",
+        paragraphs: [
+          "Este site não utiliza cookies de rastreamento de terceiros, pixels de redes sociais ou ferramentas de publicidade direcionada.",
+          "Utilizamos exclusivamente recursos de armazenamento local do navegador (localStorage) para guardar preferências do usuário:",
+        ],
+        bulletPoints: [
+          "caio_consent_analytics: armazena a sua escolha ('granted' ou 'denied') para o banner de telemetria;",
+          "Preferência de idioma: mantida na rota canônica da URL (/ ou /en-us).",
+        ],
+      },
+      {
+        id: "user-rights",
+        title: "4. Direitos do Titular de Dados",
+        paragraphs: [
+          "Em conformidade com o Artigo 18 da LGPD e os Artigos 15 a 22 do GDPR, você possui total controle sobre seus dados e pode a qualquer momento:",
+        ],
+        bulletPoints: [
+          "Revogar o consentimento concedido anteriormente através do botão de gerenciamento de cookies presente no rodapé;",
+          "Limpar os dados salvos em seu navegador apagando o cache e o localStorage nas ferramentas de desenvolvedor;",
+          "Confirmar a existência de tratamento ou solicitar esclarecimentos adicionais sobre a infraestrutura.",
+        ],
+      },
+      {
+        id: "security",
+        title: "5. Segurança e Retenção",
+        paragraphs: [
+          "Todas as conexões são protegidas por criptografia de ponta a ponta via HTTPS/TLS 1.3 com certificados válidos e políticas rigorosas de Content Security. Os dados estatísticos agregados não contêm identificadores permanentes e são processados em servidores globais da infraestrutura Vercel.",
+        ],
+      },
+    ],
+    contact: {
+      title: "6. Contato do Encarregado / Controlador",
+      text: "Para quaisquer dúvidas, solicitações ou esclarecimentos sobre privacidade e governança técnica deste projeto, entre em contato diretamente com o desenvolvedor responsável:",
+      email: "caiobnstato@gmail.com",
+      buttonLabel: "Enviar e-mail",
+    },
   },
 };
 
