@@ -54,7 +54,7 @@ function ProjectRow({
   const isLive = Boolean(project.href);
 
   return (
-    <article className="reveal grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+    <article className="reveal grid items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-16">
       <div
         className={cn(
           "group flex justify-center lg:col-span-5",
@@ -74,7 +74,7 @@ function ProjectRow({
 
       <div
         className={cn(
-          "flex flex-col items-start gap-5 lg:col-span-7",
+          "flex flex-col items-start gap-4 sm:gap-5 lg:col-span-7",
           flipped && "lg:order-1",
         )}
       >
@@ -137,14 +137,32 @@ function Metrics({ project }: { project: Project }) {
   if (project.metrics.length === 0) return null;
 
   return (
-    <dl className="flex flex-wrap gap-x-8 gap-y-4 border-t border-border/70 pt-5 sm:gap-x-12">
-      {project.metrics.map((metric) => (
-        <div key={metric.label} className="flex flex-col-reverse gap-1.5">
-          <dt className="type-label text-muted-foreground">{metric.label}</dt>
-          <dd className="type-metric text-brand">{metric.value}</dd>
-        </div>
-      ))}
-    </dl>
+    <>
+      {/* Mobile: lightweight inline metric pills so stats don't feel heavy */}
+      <dl className="flex flex-wrap items-center gap-2 pt-1 md:hidden">
+        {project.metrics.map((metric) => (
+          <div
+            key={metric.label}
+            className="inline-flex items-center gap-2 rounded-lg border border-border/80 bg-card/70 px-3 py-1.5"
+          >
+            <dd className="font-mono text-xs font-bold text-brand">
+              {metric.value}
+            </dd>
+            <dt className="text-xs text-muted-foreground">{metric.label}</dt>
+          </div>
+        ))}
+      </dl>
+
+      {/* Desktop: large display metrics */}
+      <dl className="hidden flex-wrap gap-x-12 gap-y-4 border-t border-border/70 pt-5 md:flex">
+        {project.metrics.map((metric) => (
+          <div key={metric.label} className="flex flex-col-reverse gap-1.5">
+            <dt className="type-label text-muted-foreground">{metric.label}</dt>
+            <dd className="type-metric text-brand">{metric.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </>
   );
 }
 
