@@ -1,25 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>Caio Stato — Kinetic Loop Favicon</title>
   
-  <!-- 4.5px Solid Hazard Orange Offset Drop Shadow (Cuts through dark tabs) -->
-  <rect x="8.5" y="8.5" width="48" height="48" rx="10" fill="#FF5500" />
+  <!-- Solid Plum Noir (#351E28) Offset Drop Shadow -->
+  <rect x="8.5" y="8.5" width="48" height="48" rx="10" fill="#351E28" />
 
-  <!-- Pitch Black Monolith Tile with Crisp White Rim -->
-  <rect x="4" y="4" width="48" height="48" rx="10" fill="#090A0D" stroke="#FAF8F2" stroke-width="2.5" stroke-linejoin="round" />
+  <!-- Persimmon Orange (#FF5C34) Monolith Tile with Cool Blue (#D7EFFF) Crisp Rim -->
+  <rect x="4" y="4" width="48" height="48" rx="10" fill="#FF5C34" stroke="#D7EFFF" stroke-width="2.5" stroke-linejoin="round" />
 
-  <!-- Base Black Silhouette for maximum contrast and pop -->
-  <g fill="none" stroke="#090A0D" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Continuous Plum Noir (#351E28) Kinetic Ribbon Monogram -->
+  <g fill="none" stroke="#351E28" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
     <!-- C Loop -->
     <path d="M 26 17 C 16 17 9.5 22.5 9.5 30 C 9.5 37.5 16 43 26 43" />
     <!-- S Ribbon flowing from center spine -->
-    <path d="M 26 21 C 33.5 21 44.5 21.5 44.5 27.5 C 44.5 33 29.5 31.5 29.5 37 C 29.5 41.5 36 43 44 43" />
-  </g>
-
-  <!-- Continuous Toxic Acid Green Kinetic Ribbon -->
-  <g fill="none" stroke="#32F172" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
-    <!-- C Loop -->
-    <path d="M 26 17 C 16 17 9.5 22.5 9.5 30 C 9.5 37.5 16 43 26 43" />
-    <!-- S Ribbon -->
     <path d="M 26 21 C 33.5 21 44.5 21.5 44.5 27.5 C 44.5 33 29.5 31.5 29.5 37 C 29.5 41.5 36 43 44 43" />
   </g>
 </svg>
