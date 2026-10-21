@@ -10,6 +10,7 @@ interface NodePoint {
   vx: number;
   vy: number;
   energy: number;
+  pulseTone: "blue" | "orange";
 }
 
 interface DataPulse {
@@ -19,6 +20,7 @@ interface DataPulse {
   vy: number;
   life: number;
   maxLife: number;
+  tone: "blue" | "orange";
 }
 
 /**
@@ -28,9 +30,9 @@ interface DataPulse {
  *   `bg-background` on `<html>`/`<body>`.
  * - Runs continuously (even if OS "Animate controls and elements" is disabled)
  *   so the interactive cursor physics and autonomous data pulses always work.
- * - Zero radial gradients: draws crisp geometric grid lines, interactive
- *   spring-displaced intersection nodes, cursor constellation links, and
- *   orthogonal Signal Orange data pulses.
+ * - Zero radial gradients: draws crisp Cool Blue (#D7EFFF) geometric grid lines,
+ *   interactive spring-displaced intersection nodes, Cool Blue cursor constellation
+ *   links, and dual-tone Cool Blue (#D7EFFF) + Persimmon Orange (#FF5C34) data pulses.
  */
 export function HeroInteractiveBg() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -42,7 +44,7 @@ export function HeroInteractiveBg() {
     if (!ctx) return;
 
     const SPACING = 44;
-    const INTERACTION_RADIUS = 190;
+    const INTERACTION_RADIUS = 210;
     const SPRING = 0.09;
     const DAMPING = 0.8;
 
@@ -116,23 +118,26 @@ export function HeroInteractiveBg() {
             vx: 0,
             vy: 0,
             energy: 0,
+            pulseTone: (r + c) % 3 === 0 ? "orange" : "blue",
           });
         }
       }
 
       // Seed initial pulses so the canvas is alive on frame 1
       pulses = [];
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 9; i++) {
         spawnPulse();
       }
     }
 
     function spawnPulse() {
-      if (nodes.length === 0 || pulses.length >= 10) return;
+      if (nodes.length === 0 || pulses.length >= 14) return;
       const startNode = nodes[Math.floor(Math.random() * nodes.length)];
       const horizontal = Math.random() > 0.45;
       const dir = Math.random() > 0.5 ? 1 : -1;
-      const speed = 2.6 + Math.random() * 1.4;
+      const speed = 2.6 + Math.random() * 1.5;
+      // ~65% Cool Blue (#D7EFFF), ~35% Persimmon Orange (#FF5C34)
+      const tone: "blue" | "orange" = Math.random() < 0.65 ? "blue" : "orange";
 
       pulses.push({
         x: startNode.ox,
@@ -141,6 +146,7 @@ export function HeroInteractiveBg() {
         vy: horizontal ? 0 : speed * dir,
         life: 0,
         maxLife: 100 + Math.random() * 90,
+        tone,
       });
     }
 
@@ -149,7 +155,7 @@ export function HeroInteractiveBg() {
 
       if (prefersReducedMotion) {
         ctx.clearRect(0, 0, width, height);
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.045)";
+        ctx.strokeStyle = "rgba(215, 239, 255, 0.12)";
         ctx.lineWidth = 1;
         ctx.beginPath();
         for (let c = 0; c < cols; c++) {
@@ -164,11 +170,11 @@ export function HeroInteractiveBg() {
         }
         ctx.stroke();
 
-        ctx.fillStyle = "rgba(255, 255, 255, 0.16)";
+        ctx.fillStyle = "rgba(215, 239, 255, 0.32)";
         for (let i = 0; i < nodes.length; i++) {
           const n = nodes[i];
           ctx.beginPath();
-          ctx.arc(n.ox, n.oy, 1.35, 0, Math.PI * 2);
+          ctx.arc(n.ox, n.oy, 1.5, 0, Math.PI * 2);
           ctx.fill();
         }
         return;
@@ -177,12 +183,12 @@ export function HeroInteractiveBg() {
       frame++;
       ctx.clearRect(0, 0, width, height);
 
-      if (Math.random() < 0.08) {
+      if (Math.random() < 0.12) {
         spawnPulse();
       }
 
-      // 1. Draw subtle structural grid hairlines
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.045)";
+      // 1. Draw structural Cool Blue (#D7EFFF) grid hairlines
+      ctx.strokeStyle = "rgba(215, 239, 255, 0.11)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       for (let c = 0; c < cols; c++) {
@@ -197,7 +203,7 @@ export function HeroInteractiveBg() {
       }
       ctx.stroke();
 
-      // 2. Update & draw orthogonal Signal Orange data pulses
+      // 2. Update & draw orthogonal Cool Blue + Persimmon Orange data pulses
       for (let i = pulses.length - 1; i >= 0; i--) {
         const p = pulses[i];
         p.x += p.vx;
@@ -216,22 +222,35 @@ export function HeroInteractiveBg() {
         }
 
         const progress = p.life / p.maxLife;
-        const alpha = Math.sin(progress * Math.PI) * 0.85;
-        const tailX = p.x - p.vx * 18;
-        const tailY = p.y - p.vy * 18;
+        const alpha = Math.sin(progress * Math.PI) * 0.92;
+        const tailX = p.x - p.vx * 20;
+        const tailY = p.y - p.vy * 20;
 
-        ctx.strokeStyle = `rgba(255, 110, 48, ${alpha.toFixed(3)})`;
-        ctx.lineWidth = 1.75;
-        ctx.beginPath();
-        ctx.moveTo(tailX, tailY);
-        ctx.lineTo(p.x, p.y);
-        ctx.stroke();
+        if (p.tone === "blue") {
+          ctx.strokeStyle = `rgba(215, 239, 255, ${alpha.toFixed(3)})`;
+          ctx.lineWidth = 1.85;
+          ctx.beginPath();
+          ctx.moveTo(tailX, tailY);
+          ctx.lineTo(p.x, p.y);
+          ctx.stroke();
 
-        // Bright leading head dot
-        ctx.fillStyle = `rgba(255, 140, 80, ${alpha.toFixed(3)})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fill();
+          ctx.fillStyle = `rgba(215, 239, 255, ${Math.min(1, alpha * 1.15).toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.strokeStyle = `rgba(255, 92, 52, ${alpha.toFixed(3)})`;
+          ctx.lineWidth = 1.85;
+          ctx.beginPath();
+          ctx.moveTo(tailX, tailY);
+          ctx.lineTo(p.x, p.y);
+          ctx.stroke();
+
+          ctx.fillStyle = `rgba(255, 120, 85, ${alpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
 
       // 3. Update node physics & collect energized nodes
@@ -240,9 +259,9 @@ export function HeroInteractiveBg() {
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
 
-        // Subtle ambient wave so nodes breathe even before mouse move
+        // Subtle ambient wave so nodes shimmer in Cool Blue even before mouse move
         const wave =
-          Math.sin(n.ox * 0.012 + n.oy * 0.012 + frame * 0.025) * 0.5 + 0.5;
+          Math.sin(n.ox * 0.014 + n.oy * 0.014 + frame * 0.028) * 0.5 + 0.5;
 
         if (pointer.active) {
           const dx = pointer.x - n.ox;
@@ -251,13 +270,16 @@ export function HeroInteractiveBg() {
 
           if (dist < INTERACTION_RADIUS && dist > 0.01) {
             const factor = 1 - dist / INTERACTION_RADIUS;
-            const push = Math.sin(factor * Math.PI) * 14;
+            const push = Math.sin(factor * Math.PI) * 15;
             const targetX = n.ox - (dx / dist) * push;
             const targetY = n.oy - (dy / dist) * push;
 
             n.vx += (targetX - n.x) * SPRING;
             n.vy += (targetY - n.y) * SPRING;
-            n.energy = Math.max(n.energy, factor);
+            if (factor > n.energy) {
+              n.energy = factor;
+              n.pulseTone = "blue";
+            }
           } else {
             n.vx += (n.ox - n.x) * SPRING;
             n.vy += (n.oy - n.y) * SPRING;
@@ -271,28 +293,42 @@ export function HeroInteractiveBg() {
         n.vy *= DAMPING;
         n.x += n.vx;
         n.y += n.vy;
-        n.energy *= 0.93;
+        n.energy *= 0.935;
 
         // Energize node when a pulse crosses it
         for (let pIdx = 0; pIdx < pulses.length; pIdx++) {
           const p = pulses[pIdx];
           if (Math.abs(p.x - n.ox) < 12 && Math.abs(p.y - n.oy) < 12) {
-            n.energy = Math.max(n.energy, 0.85);
+            n.energy = Math.max(n.energy, 0.88);
+            n.pulseTone = p.tone;
           }
         }
 
-        if (n.energy > 0.08) {
+        if (n.energy > 0.07) {
           energized.push(n);
         }
 
         const e = n.energy;
-        const radius = 1.35 + e * 2.1;
+        const radius = 1.45 + e * 2.3;
 
         if (e > 0.05) {
-          ctx.fillStyle = `rgba(255, 110, 48, ${(0.3 + e * 0.7).toFixed(3)})`;
+          // Outer Cool Blue halo ring around energized nodes
+          if (e > 0.25) {
+            ctx.strokeStyle = `rgba(215, 239, 255, ${(e * 0.38).toFixed(3)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, radius + 3.2, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+
+          if (n.pulseTone === "orange") {
+            ctx.fillStyle = `rgba(255, 92, 52, ${(0.35 + e * 0.65).toFixed(3)})`;
+          } else {
+            ctx.fillStyle = `rgba(215, 239, 255, ${(0.45 + e * 0.55).toFixed(3)})`;
+          }
         } else {
-          const baseAlpha = 0.14 + wave * 0.12;
-          ctx.fillStyle = `rgba(255, 255, 255, ${baseAlpha.toFixed(3)})`;
+          const baseAlpha = 0.24 + wave * 0.22;
+          ctx.fillStyle = `rgba(215, 239, 255, ${baseAlpha.toFixed(3)})`;
         }
 
         ctx.beginPath();
@@ -300,10 +336,10 @@ export function HeroInteractiveBg() {
         ctx.fill();
       }
 
-      // 4. Draw geometric constellation lines between energized nodes & cursor
+      // 4. Draw Cool Blue geometric constellation lines between energized nodes
       if (energized.length > 1) {
-        ctx.lineWidth = 1;
-        const maxDistSq = (SPACING * 1.65) ** 2;
+        ctx.lineWidth = 1.15;
+        const maxDistSq = (SPACING * 1.75) ** 2;
 
         for (let i = 0; i < energized.length; i++) {
           const a = energized[i];
@@ -312,9 +348,9 @@ export function HeroInteractiveBg() {
             const dSq =
               (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
             if (dSq < maxDistSq) {
-              const alpha = Math.min(a.energy, b.energy) * 0.42;
+              const alpha = Math.min(a.energy, b.energy) * 0.58;
               if (alpha > 0.03) {
-                ctx.strokeStyle = `rgba(255, 110, 48, ${alpha.toFixed(3)})`;
+                ctx.strokeStyle = `rgba(215, 239, 255, ${alpha.toFixed(3)})`;
                 ctx.beginPath();
                 ctx.moveTo(a.x, a.y);
                 ctx.lineTo(b.x, b.y);

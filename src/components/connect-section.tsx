@@ -61,7 +61,7 @@ export function ConnectSection({ dict }: { dict: Dictionary["connect"] }) {
             type="button"
             onClick={handleCopy}
             aria-live="polite"
-            className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-border-strong px-6 py-3.5 text-sm font-medium text-foreground transition-[color,border-color,transform] duration-150 ease-out hover:border-brand-border hover:text-brand active:translate-y-px sm:w-auto motion-reduce:transform-none"
+            className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-highlight/40 bg-highlight/10 px-6 py-3.5 text-sm font-medium text-highlight transition-[color,background-color,border-color,transform] duration-150 ease-out hover:border-highlight hover:bg-highlight hover:text-highlight-foreground active:translate-y-px sm:w-auto motion-reduce:transform-none"
           >
             <span className="relative inline-flex h-4 w-4 shrink-0">
               <Copy

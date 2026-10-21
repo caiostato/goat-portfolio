@@ -62,7 +62,7 @@ export function ExperienceSection({ dict }: { dict: Dictionary["experience"] }) 
                       ) : null}
                     </div>
                     <p className="text-sm font-medium text-brand">{exp.role}</p>
-                    <p className="type-label text-muted-foreground">
+                    <p className="type-label text-highlight/80">
                       {exp.period}
                     </p>
                   </div>
@@ -106,7 +106,7 @@ export function ExperienceSection({ dict }: { dict: Dictionary["experience"] }) 
                   {exp.stack.map((tech) => (
                     <li
                       key={tech}
-                      className="type-mono rounded-md border border-border/80 bg-card/40 px-2.5 py-1 text-xs text-muted-foreground"
+                      className="type-mono rounded-md border border-highlight/35 bg-highlight/12 px-2.5 py-1 text-xs text-highlight"
                     >
                       {tech}
                     </li>

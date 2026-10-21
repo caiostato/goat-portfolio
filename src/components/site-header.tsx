@@ -172,7 +172,7 @@ export function SiteHeader({
                 href={item.href}
                 className="group flex items-center gap-1.5 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground"
               >
-                <span className="type-mono text-[10px] text-brand/75 transition-colors group-hover:text-brand">
+                <span className="type-mono text-[10px] text-highlight transition-colors group-hover:text-brand">
                   0{idx + 1}
                 </span>
                 <span>{item.label}</span>
@@ -252,7 +252,7 @@ function LocaleSwitcher({ lang }: { lang: Locale }) {
   return (
     <nav
       aria-label={lang === "pt-br" ? "Seleção de idioma" : "Language switcher"}
-      className="type-label flex h-8 items-center rounded-full border border-border bg-card/60 px-2 text-[10px] text-muted-foreground"
+      className="type-label flex h-8 items-center rounded-full border border-highlight/30 bg-highlight/10 px-2 text-[10px] text-highlight/85"
     >
       {locales.map((locale, index) => (
         <span key={locale} className="flex items-center">

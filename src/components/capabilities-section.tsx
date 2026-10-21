@@ -74,7 +74,7 @@ export function CapabilitiesSection({
           return (
             <li
               key={capability.title}
-              className="reveal flex flex-col gap-5 rounded-2xl border border-border/80 bg-card/50 p-7 transition-colors duration-200 hover:border-brand-border"
+              className="reveal flex flex-col gap-5 rounded-2xl border border-highlight/25 bg-card/60 p-7 transition-colors duration-200 hover:border-highlight/55"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-brand-border bg-brand-subtle text-brand">
                 <Icon className="h-5 w-5" aria-hidden="true" />
@@ -107,7 +107,7 @@ export function CapabilitiesSection({
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category) => (
             <div key={category.label} className="flex flex-col gap-4">
-              <span className="type-label text-muted-foreground">
+              <span className="type-label text-highlight">
                 {category.label}
               </span>
 
@@ -115,7 +115,7 @@ export function CapabilitiesSection({
                 {category.items.map((tech) => (
                   <li
                     key={tech}
-                    className="type-mono rounded-lg border border-border/80 bg-card/60 px-3 py-1.5 text-xs text-foreground-subtle transition-colors duration-150 hover:border-brand-border hover:text-brand"
+                    className="type-mono rounded-lg border border-highlight/35 bg-highlight/12 px-3 py-1.5 text-xs text-highlight transition-colors duration-150 hover:border-brand-border hover:bg-brand-subtle hover:text-brand"
                   >
                     {tech}
                   </li>

@@ -112,7 +112,7 @@ function Meta({
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
       {parts.length > 0 ? (
-        <p className="type-label text-muted-foreground">{parts.join(" · ")}</p>
+        <p className="type-label text-highlight/85">{parts.join(" · ")}</p>
       ) : null}
 
       {isLive ? (
@@ -143,9 +143,9 @@ function Metrics({ project }: { project: Project }) {
         {project.metrics.map((metric) => (
           <div
             key={metric.label}
-            className="inline-flex items-center gap-2 rounded-lg border border-border/80 bg-card/70 px-3 py-1.5"
+            className="inline-flex items-center gap-2 rounded-lg border border-highlight/30 bg-highlight/10 px-3 py-1.5"
           >
-            <dd className="font-mono text-xs font-bold text-brand">
+            <dd className="font-mono text-xs font-bold text-highlight">
               {metric.value}
             </dd>
             <dt className="text-xs text-muted-foreground">{metric.label}</dt>
@@ -174,7 +174,7 @@ function Tags({ project }: { project: Project }) {
       {project.tags.map((tag) => (
         <li
           key={tag}
-          className="type-mono rounded-md border border-border/80 bg-card/50 px-2.5 py-1 text-xs text-muted-foreground"
+          className="type-mono rounded-md border border-highlight/35 bg-highlight/12 px-2.5 py-1 text-xs text-highlight transition-colors hover:border-highlight/60 hover:bg-highlight/20"
         >
           {tag}
         </li>
@@ -209,7 +209,7 @@ function Actions({ project, dict }: { project: Project; dict: ProjectsDict }) {
           href={project.repo}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border-strong px-5 py-3 text-sm font-medium whitespace-nowrap text-foreground transition-colors duration-150 hover:border-brand-border hover:text-brand sm:w-auto sm:py-2.5"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-highlight/40 bg-highlight/10 px-5 py-3 text-sm font-medium whitespace-nowrap text-highlight transition-colors duration-150 hover:bg-highlight hover:text-highlight-foreground sm:w-auto sm:py-2.5"
         >
           <GitBranch className="h-4 w-4" aria-hidden="true" />
           {dict.viewRepo}

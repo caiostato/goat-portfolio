@@ -350,7 +350,7 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
         description={copy.description}
       />
 
-      <div className="reveal overflow-hidden rounded-2xl border border-border bg-card/45">
+      <div className="reveal overflow-hidden rounded-2xl border border-highlight/30 bg-card/55">
         {/* Top Scenario Selector Bar */}
         <div className="flex flex-col gap-3 border-b border-border/80 bg-card/80 px-4 py-3.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-5 md:px-6">
           <div
@@ -377,7 +377,7 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
                     "inline-flex cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-xs font-medium transition-colors sm:px-4",
                     isSelected
                       ? "bg-brand text-brand-foreground font-semibold"
-                      : "border border-border/70 bg-background/50 text-muted-foreground hover:border-brand-border hover:text-foreground",
+                      : "border border-highlight/30 bg-highlight/8 text-highlight/90 hover:border-highlight/60 hover:bg-highlight/15",
                   )}
                 >
                   <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
@@ -446,7 +446,7 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
               <div className="grid grid-cols-2 gap-4">
                 {scenario.metrics.map((m) => (
                   <div key={m.label}>
-                    <div className="font-mono text-xl font-bold text-foreground">
+                    <div className="font-mono text-xl font-bold text-highlight">
                       {m.value}
                     </div>
                     <div className="type-label mt-1 text-muted-foreground">
@@ -496,7 +496,7 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
                         {s.actor}
                       </span>
                     </div>
-                    <span className="type-mono flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <span className="type-mono flex items-center gap-1.5 text-xs text-highlight">
                       <ShieldCheck className="h-3.5 w-3.5 text-brand" aria-hidden="true" />
                       {s.latency}
                     </span>
@@ -506,7 +506,7 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
                     {s.action}
                   </p>
 
-                  <pre className="type-mono mt-2.5 max-w-full overflow-x-auto rounded-lg border border-border/60 bg-card/70 px-3 py-2 text-xs text-foreground-subtle">
+                  <pre className="type-mono mt-2.5 max-w-full overflow-x-auto rounded-lg border border-highlight/35 bg-highlight/10 px-3 py-2 text-xs text-highlight">
                     <code>{s.payload}</code>
                   </pre>
                 </div>

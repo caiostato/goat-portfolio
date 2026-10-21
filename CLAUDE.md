@@ -16,11 +16,12 @@ This repository is the bilingual (`pt-br` default at `/`, `en-us` at `/en-us`) p
 ## Design & Technical Decisions
 
 1. **Color Palette & Surface Contrast (`src/app/globals.css`)**
-   - Dark-only OKLCH token system pairing deep Matte Carbon (`--background: oklch(0.115 0.004 260)`) with alternating Slate-Graphite section contrast (`--surface-contrast: oklch(0.162 0.008 255)`) and lifted card surfaces (`--card: oklch(0.188 0.008 255)`).
-   - **International Signal Orange** (`--brand: oklch(0.7 0.195 42)`) serves as the high-visibility accent for telemetry, active toggles, and primary CTAs.
+   - **Plum Noir (`#351E28` / `oklch(0.269 0.039 352.4)`):** Deep, velvety dark background base with rich contrasting surfaces (`--surface-contrast: oklch(0.235 0.035 352.4)` and elevated cards `--card: oklch(0.325 0.042 352.4)`).
+   - **Persimmon Orange (`#FF5C34` / `oklch(0.686 0.206 34.8)`):** High-visibility accent for primary CTAs, active toggles, kinetic data pulses, and telemetry markers.
+   - **Cool Blue (`#D7EFFF` / `oklch(0.939 0.033 237)`):** High-precision technical highlights, coordinate grid hairlines, technology tags, and payload code blocks.
 
 2. **Interactive Hero Canvas (`src/components/hero-interactive-bg.tsx`)**
-   - Zero radial gradients. Uses an HTML5 `<canvas>` (`z-0`) that draws structural grid lines, spring-displaced intersection nodes that react to pointer movement, constellation connectors, and autonomous orthogonal Signal Orange data pulses.
+   - Zero radial gradients. Uses an HTML5 `<canvas>` (`z-0`) that draws structural Cool Blue grid lines, spring-displaced intersection nodes that react to pointer movement, constellation connectors, and autonomous orthogonal Persimmon Orange data pulses.
 
 3. **Live Mobile Project Previews (`src/components/site-preview.tsx` & `src/components/projects-section.tsx`)**
    - Features live production systems (**Cerasos** at `https://cerasos.com.br/` and **Arkea Labs** at `https://arkealabs.com/`) alongside **AR3 Capital**.

@@ -46,12 +46,19 @@
   --color-foreground-subtle: var(--foreground-subtle);
   --color-background: var(--background);
 
-  /* Brand highlight — International Signal Orange. */
+  /* Brand highlight — Persimmon Orange (#FF5C34). */
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-subtle: var(--brand-subtle);
   --color-brand-border: var(--brand-border);
+
+  /* Highlight — Cool Blue (#D7EFFF). */
+  --color-highlight: var(--highlight);
+  --color-highlight-strong: var(--highlight-strong);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-highlight-subtle: var(--highlight-subtle);
+  --color-highlight-border: var(--highlight-border);
 
   /* Motion tokens. Built-in CSS easings are too weak for deliberate motion. */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -76,55 +83,62 @@
 .dark {
   color-scheme: dark;
 
-  /* Matte carbon & contrasting slate-graphite surfaces */
-  --background: oklch(0.115 0.004 260);
-  --surface-contrast: oklch(0.162 0.008 255);
-  --foreground: oklch(0.985 0 0);
-  --foreground-subtle: oklch(0.86 0.005 260);
+  /* Plum Noir (#351E28) dark background system */
+  --background: oklch(0.269 0.039 352.4);
+  --surface-contrast: oklch(0.235 0.035 352.4);
+  --foreground: oklch(0.985 0.015 237);
+  --foreground-subtle: oklch(0.92 0.028 237);
 
-  --card: oklch(0.188 0.008 255);
-  --card-elevated: oklch(0.228 0.01 255);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.188 0.008 255);
-  --popover-foreground: oklch(0.985 0 0);
+  --card: oklch(0.325 0.042 352.4);
+  --card-elevated: oklch(0.365 0.046 352.4);
+  --card-foreground: oklch(0.985 0.015 237);
+  --popover: oklch(0.325 0.042 352.4);
+  --popover-foreground: oklch(0.985 0.015 237);
 
-  --primary: oklch(0.965 0 0);
-  --primary-foreground: oklch(0.135 0.005 260);
-  --secondary: oklch(0.245 0.008 255);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.225 0.008 255);
-  --muted-foreground: oklch(0.7 0.008 255);
+  --primary: oklch(0.985 0.015 237);
+  --primary-foreground: oklch(0.269 0.039 352.4);
+  --secondary: oklch(0.34 0.038 352.4);
+  --secondary-foreground: oklch(0.985 0.015 237);
+  --muted: oklch(0.32 0.035 352.4);
+  --muted-foreground: oklch(0.80 0.014 352.4);
 
-  /* shadcn semantics: `accent` is the neutral hover surface, not a highlight. */
-  --accent: oklch(0.245 0.008 255);
-  --accent-foreground: oklch(0.985 0 0);
+  /* shadcn semantics: accent is the neutral hover surface */
+  --accent: oklch(0.34 0.038 352.4);
+  --accent-foreground: oklch(0.985 0.015 237);
 
-  /* Brand: International Signal Orange — high-visibility telemetry & CTAs. */
-  --brand: oklch(0.7 0.195 42);
-  --brand-strong: oklch(0.76 0.185 45);
-  --brand-foreground: oklch(0.13 0.02 42);
-  --brand-subtle: oklch(0.7 0.195 42 / 0.14);
-  --brand-border: oklch(0.7 0.195 42 / 0.45);
+  /* Brand: Persimmon Orange (#FF5C34) — accent for CTAs, telemetry & active states */
+  --brand: oklch(0.686 0.206 34.8);
+  --brand-strong: oklch(0.74 0.198 38);
+  --brand-foreground: oklch(0.18 0.04 352.4);
+  --brand-subtle: oklch(0.686 0.206 34.8 / 0.15);
+  --brand-border: oklch(0.686 0.206 34.8 / 0.45);
+
+  /* Highlight: Cool Blue (#D7EFFF) — high-precision highlights & tags */
+  --highlight: oklch(0.939 0.033 237);
+  --highlight-strong: oklch(0.975 0.02 237);
+  --highlight-foreground: oklch(0.20 0.04 250);
+  --highlight-subtle: oklch(0.939 0.033 237 / 0.16);
+  --highlight-border: oklch(0.939 0.033 237 / 0.45);
 
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 13%);
-  --border-strong: oklch(1 0 0 / 22%);
-  --input: oklch(1 0 0 / 15%);
+  --border: oklch(0.939 0.033 237 / 18%);
+  --border-strong: oklch(0.939 0.033 237 / 32%);
+  --input: oklch(0.939 0.033 237 / 16%);
   --ring: var(--brand);
 
-  --chart-1: oklch(0.7 0.195 42);
-  --chart-2: oklch(0.62 0.16 42);
-  --chart-3: oklch(0.556 0 0);
-  --chart-4: oklch(0.439 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --chart-1: oklch(0.686 0.206 34.8);
+  --chart-2: oklch(0.939 0.033 237);
+  --chart-3: oklch(0.556 0.03 352.4);
+  --chart-4: oklch(0.439 0.03 352.4);
+  --chart-5: oklch(0.269 0.039 352.4);
 
-  --sidebar: oklch(0.148 0.005 260);
-  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar: oklch(0.24 0.035 352.4);
+  --sidebar-foreground: oklch(0.985 0.015 237);
   --sidebar-primary: var(--brand);
   --sidebar-primary-foreground: var(--brand-foreground);
-  --sidebar-accent: oklch(0.22 0.006 260);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 11%);
+  --sidebar-accent: oklch(0.32 0.038 352.4);
+  --sidebar-accent-foreground: oklch(0.985 0.015 237);
+  --sidebar-border: oklch(0.939 0.033 237 / 12%);
   --sidebar-ring: var(--brand);
 
   --radius: 0.5rem;

@@ -14,7 +14,7 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
   return (
     <section
       id="top"
-      className="relative overflow-hidden border-b border-border/70 px-5 sm:px-6 md:px-8"
+      className="relative overflow-hidden border-b border-highlight/20 px-5 sm:px-6 md:px-8"
     >
       <HeroInteractiveBg />
 
@@ -30,24 +30,24 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75 motion-reduce:hidden" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
             </span>
-            <span className="type-mono text-xs font-medium text-foreground-subtle">
+            <span className="type-mono text-xs font-medium text-highlight">
               {dict.role} <span className="text-brand">·</span> São Paulo, BR
             </span>
           </div>
 
           {/* Tablet / Desktop: dual floating pills */}
           <div className="hidden flex-wrap items-center justify-between gap-4 sm:flex">
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-card/85 px-3.5 py-1.5 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-highlight/35 bg-highlight/10 px-3.5 py-1.5 backdrop-blur-md">
               <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75 motion-reduce:hidden" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
               </span>
-              <span className="type-label text-[11px] text-foreground">
+              <span className="type-label text-[11px] text-highlight">
                 {dict.badge}
               </span>
             </div>
 
-            <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/70 px-3.5 py-1.5 text-muted-foreground backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-highlight/35 bg-highlight/10 px-3.5 py-1.5 text-highlight backdrop-blur-md">
               <MapPin
                 className="h-3.5 w-3.5 shrink-0 text-brand"
                 aria-hidden="true"
@@ -92,7 +92,7 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
 
             <a
               href="mailto:caiobnstato@gmail.com"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border-strong bg-card/80 px-6 py-3.5 text-sm font-medium text-foreground backdrop-blur-md transition-colors duration-150 hover:border-brand-border hover:text-brand sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-highlight/40 bg-highlight/10 px-6 py-3.5 text-sm font-medium text-highlight backdrop-blur-md transition-colors duration-150 hover:border-highlight hover:bg-highlight hover:text-highlight-foreground sm:w-auto"
             >
               <span>caiobnstato@gmail.com</span>
             </a>
@@ -104,17 +104,17 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
           <dl
             aria-label="Key figures"
             style={{ "--enter-delay": "240ms" } as React.CSSProperties}
-            className="enter grid grid-cols-3 gap-2 border-t border-border/80 pt-6 sm:gap-6 sm:pt-10"
+            className="enter grid grid-cols-3 gap-2 border-t border-highlight/25 pt-6 sm:gap-6 sm:pt-10"
           >
             {dict.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="flex min-w-0 flex-col-reverse justify-end gap-1 rounded-xl border border-transparent py-1 transition-colors sm:gap-1.5 sm:p-2 sm:hover:border-border/60 sm:hover:bg-card/40"
+                className="flex min-w-0 flex-col-reverse justify-end gap-1 rounded-xl border border-transparent py-1 transition-colors sm:gap-1.5 sm:p-2 sm:hover:border-highlight/35 sm:hover:bg-highlight/8"
               >
                 <dt className="text-[11px] leading-snug text-muted-foreground sm:font-mono sm:text-[11px] sm:tracking-[0.14em] sm:uppercase">
                   {stat.label}
                 </dt>
-                <dd className="font-mono text-2xl font-bold tracking-tight text-foreground tabular-nums sm:text-[clamp(1.75rem,1.35rem+1.4vw,2.5rem)]">
+                <dd className="font-mono text-2xl font-bold tracking-tight text-highlight tabular-nums sm:text-[clamp(1.75rem,1.35rem+1.4vw,2.5rem)]">
                   {stat.value}
                 </dd>
               </div>
