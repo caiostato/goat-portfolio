@@ -350,9 +350,9 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
         description={copy.description}
       />
 
-      <div className="reveal overflow-hidden rounded-2xl border border-highlight/30 bg-card/55">
+      <div className="reveal overflow-hidden rounded-2xl border border-border bg-card/45">
         {/* Top Scenario Selector Bar */}
-        <div className="flex flex-col gap-3 border-b border-border/80 bg-card/80 px-4 py-3.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-5 md:px-6">
+        <div className="flex flex-col gap-3 border-b border-border bg-card/75 px-4 py-3.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-5 md:px-6">
           <div
             role="tablist"
             aria-label={copy.eyebrow}
@@ -374,13 +374,19 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
                   onClick={() => handleSelectTab(tab.id)}
                   onKeyDown={(e) => handleTabKeyDown(e, idx)}
                   className={cn(
-                    "inline-flex cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-xs font-medium transition-colors sm:px-4",
+                    "inline-flex cursor-pointer items-center gap-2 rounded-full border px-3.5 py-2 text-xs transition-colors sm:px-4",
                     isSelected
-                      ? "bg-brand text-brand-foreground font-semibold"
-                      : "border border-highlight/30 bg-highlight/8 text-highlight/90 hover:border-highlight/60 hover:bg-highlight/15",
+                      ? "border-border-strong bg-card-elevated font-semibold text-foreground shadow-xs"
+                      : "border-border bg-background/50 font-medium text-muted-foreground hover:border-border-strong hover:text-foreground",
                   )}
                 >
-                  <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  <Icon
+                    className={cn(
+                      "h-3.5 w-3.5 shrink-0",
+                      isSelected ? "text-brand" : "text-muted-foreground",
+                    )}
+                    aria-hidden="true"
+                  />
                   <span>{tab.label}</span>
                 </button>
               );
@@ -417,7 +423,7 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
           id={`tabpanel-${activeId}`}
           aria-labelledby={`tab-${activeId}`}
           tabIndex={0}
-          className="grid grid-cols-1 gap-6 p-4 sm:gap-8 sm:p-6 md:p-8 lg:grid-cols-12 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="grid grid-cols-1 gap-6 p-4 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:gap-8 sm:p-6 md:p-8 lg:grid-cols-12"
         >
           {/* Left Context Column (4 cols) */}
           <div className="flex min-w-0 flex-col justify-between gap-6 lg:col-span-4">
@@ -442,11 +448,11 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
               </p>
             </div>
 
-            <div className="flex flex-col gap-4 border-t border-border/70 pt-5">
+            <div className="flex flex-col gap-4 border-t border-border pt-5">
               <div className="grid grid-cols-2 gap-4">
                 {scenario.metrics.map((m) => (
                   <div key={m.label}>
-                    <div className="font-mono text-xl font-bold text-highlight">
+                    <div className="font-mono text-xl font-bold text-foreground">
                       {m.value}
                     </div>
                     <div className="type-label mt-1 text-muted-foreground">
@@ -459,7 +465,7 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
               <div
                 role="status"
                 aria-live="polite"
-                className="flex items-center gap-2 rounded-lg border border-border/70 bg-background/60 px-3 py-2"
+                className="flex items-center gap-2 rounded-lg border border-border bg-background/60 px-3 py-2"
               >
                 {activeStep >= 3 ? (
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
@@ -483,8 +489,8 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
                   className={cn(
                     "min-w-0 rounded-xl border p-3.5 transition-all duration-300 sm:p-4",
                     isVisible
-                      ? "border-border bg-background/85 opacity-100 translate-y-0"
-                      : "border-border/40 bg-background/30 opacity-40 translate-y-1",
+                      ? "translate-y-0 border-border bg-background/85 opacity-100"
+                      : "translate-y-1 border-border/40 bg-background/30 opacity-40",
                   )}
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2">
@@ -496,7 +502,7 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
                         {s.actor}
                       </span>
                     </div>
-                    <span className="type-mono flex items-center gap-1.5 text-xs text-highlight">
+                    <span className="type-mono flex items-center gap-1.5 text-xs text-muted-foreground">
                       <ShieldCheck className="h-3.5 w-3.5 text-brand" aria-hidden="true" />
                       {s.latency}
                     </span>
@@ -506,7 +512,7 @@ export function LiveSandboxSection({ lang }: { lang: Locale }) {
                     {s.action}
                   </p>
 
-                  <pre className="type-mono mt-2.5 max-w-full overflow-x-auto rounded-lg border border-highlight/35 bg-highlight/10 px-3 py-2 text-xs text-highlight">
+                  <pre className="type-mono mt-2.5 max-w-full overflow-x-auto rounded-lg border border-border bg-background/90 px-3 py-2 text-xs text-foreground-subtle">
                     <code>{s.payload}</code>
                   </pre>
                 </div>

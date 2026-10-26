@@ -110,20 +110,20 @@
   --brand: oklch(0.686 0.206 34.8);
   --brand-strong: oklch(0.74 0.198 38);
   --brand-foreground: oklch(0.18 0.04 352.4);
-  --brand-subtle: oklch(0.686 0.206 34.8 / 0.15);
-  --brand-border: oklch(0.686 0.206 34.8 / 0.45);
+  --brand-subtle: oklch(0.686 0.206 34.8 / 0.14);
+  --brand-border: oklch(0.686 0.206 34.8 / 0.42);
 
   /* Highlight: Cool Blue (#D7EFFF) — high-precision highlights & tags */
   --highlight: oklch(0.939 0.033 237);
   --highlight-strong: oklch(0.975 0.02 237);
   --highlight-foreground: oklch(0.20 0.04 250);
-  --highlight-subtle: oklch(0.939 0.033 237 / 0.16);
-  --highlight-border: oklch(0.939 0.033 237 / 0.45);
+  --highlight-subtle: oklch(0.939 0.033 237 / 0.09);
+  --highlight-border: oklch(0.939 0.033 237 / 0.24);
 
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.939 0.033 237 / 18%);
-  --border-strong: oklch(0.939 0.033 237 / 32%);
-  --input: oklch(0.939 0.033 237 / 16%);
+  --border: oklch(0.939 0.033 237 / 12%);
+  --border-strong: oklch(0.939 0.033 237 / 24%);
+  --input: oklch(0.939 0.033 237 / 14%);
   --ring: var(--brand);
 
   --chart-1: oklch(0.686 0.206 34.8);
@@ -155,18 +155,29 @@
   * {
     @apply border-border outline-ring/50;
   }
+  ::selection {
+    background-color: oklch(0.686 0.206 34.8 / 0.28);
+    color: var(--foreground);
+  }
   body {
     @apply bg-background text-foreground;
+    caret-color: var(--brand);
   }
   html {
     @apply font-sans;
     scroll-behavior: smooth;
     /* Clears the sticky header when jumping to section anchors. */
     scroll-padding-top: 5rem;
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.939 0.033 237 / 0.22) var(--surface-contrast);
+  }
+  a {
+    text-underline-offset: 0.22em;
   }
   /* Mono labels are set in caps at small sizes — tighten the default tracking. */
   .font-mono {
     font-feature-settings: 'ss02' on, 'cv01' on;
+    font-variant-numeric: tabular-nums;
   }
   :focus-visible {
     outline: 2px solid var(--brand);
@@ -193,7 +204,7 @@
     font-size: clamp(2.125rem, 1.1rem + 4.8vw, 5.25rem);
     font-weight: 700;
     line-height: 1.02;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.04em;
   }
 
   @media (min-width: 768px) {
@@ -348,7 +359,6 @@
   }
   .animate-ping,
   .animate-pulse,
-  .animate-bounce,
   .animate-spin {
     animation: none !important;
   }

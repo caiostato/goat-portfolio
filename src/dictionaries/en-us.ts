@@ -210,7 +210,7 @@ const dictionary: Dictionary = {
       "Clean Architecture and DDD are not academic exercises. They are what lets a team keep shipping without the codebase turning against them. Performance and accessibility follow from structure. You do not bolt them on at the end.",
   },
   connect: {
-    heading: "Let's talk",
+    heading: "Connect with me",
     body: "Open to new opportunities. Send a question, or just say hi, and I will get back to you.",
     emailCta: "Send an email",
     copyCta: "Copy email",

@@ -86,8 +86,8 @@ export function SiteHeader({
         }}
       />
 
-      {/* Mobile Header: Clean, edge-to-edge glass bar (no capsule morph jitter) */}
-      <div className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-md backdrop-saturate-150 md:hidden">
+      {/* Mobile Header: Clean, edge-to-edge glass bar */}
+      <div className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md backdrop-saturate-150 md:hidden">
         <header className="mx-auto flex h-14 items-center justify-between gap-2 px-4">
           <a
             href="#top"
@@ -107,11 +107,19 @@ export function SiteHeader({
 
             <a
               href="#connect"
-              className="inline-flex h-8 items-center gap-1.5 rounded-full bg-brand px-3 font-mono text-[10px] font-bold tracking-wider whitespace-nowrap text-brand-foreground uppercase transition-colors hover:bg-brand-strong"
+              className={cn(
+                "inline-flex h-8 items-center gap-1.5 rounded-full px-3 font-mono text-[10px] font-bold tracking-wider whitespace-nowrap uppercase transition-colors",
+                mobileBottomCtaVisible
+                  ? "border border-border-strong bg-card/80 text-foreground hover:border-brand-border"
+                  : "bg-brand text-brand-foreground hover:bg-brand-strong",
+              )}
             >
               <span
                 aria-hidden="true"
-                className="h-1.5 w-1.5 rounded-full bg-brand-foreground"
+                className={cn(
+                  "h-1.5 w-1.5 rounded-full",
+                  mobileBottomCtaVisible ? "bg-brand" : "bg-brand-foreground",
+                )}
               />
               {dict.contact}
             </a>
@@ -172,7 +180,7 @@ export function SiteHeader({
                 href={item.href}
                 className="group flex items-center gap-1.5 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground"
               >
-                <span className="type-mono text-[10px] text-highlight transition-colors group-hover:text-brand">
+                <span className="type-mono text-[10px] text-muted-foreground/70 transition-colors group-hover:text-brand">
                   0{idx + 1}
                 </span>
                 <span>{item.label}</span>
@@ -185,7 +193,7 @@ export function SiteHeader({
 
             <a
               href="#connect"
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-xs font-semibold tracking-wider whitespace-nowrap text-brand-foreground uppercase transition-[background-color,transform] duration-150 ease-out hover:bg-brand-strong active:scale-[0.97] motion-reduce:transform-none"
+              className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-xs font-semibold tracking-wider whitespace-nowrap text-brand-foreground uppercase shadow-[0_4px_14px_-2px_oklch(0.686_0.206_34.8/0.35)] transition-[background-color,transform,box-shadow] duration-150 ease-out hover:bg-brand-strong active:scale-[0.97] motion-reduce:transform-none"
             >
               <span
                 aria-hidden="true"
@@ -214,10 +222,10 @@ export function SiteHeader({
           )}
         >
           <div className="flex min-w-0 items-center gap-2">
-            <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75 motion-reduce:hidden" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
-            </span>
+            <span
+              aria-hidden="true"
+              className="inline-flex h-2 w-2 shrink-0 rounded-full bg-brand"
+            />
             <span className="truncate font-mono text-[11px] font-medium text-foreground">
               {lang === "pt-br" ? "Disponível para projetos" : "Available for work"}
             </span>
@@ -252,7 +260,7 @@ function LocaleSwitcher({ lang }: { lang: Locale }) {
   return (
     <nav
       aria-label={lang === "pt-br" ? "Seleção de idioma" : "Language switcher"}
-      className="type-label flex h-8 items-center rounded-full border border-highlight/30 bg-highlight/10 px-2 text-[10px] text-highlight/85"
+      className="type-label flex h-8 items-center rounded-full border border-border bg-card/60 px-2 text-[10px] text-muted-foreground"
     >
       {locales.map((locale, index) => (
         <span key={locale} className="flex items-center">
@@ -272,7 +280,7 @@ function LocaleSwitcher({ lang }: { lang: Locale }) {
             className={cn(
               "rounded px-1.5 py-0.5 transition-colors",
               locale === lang
-                ? "font-bold text-brand"
+                ? "font-bold text-foreground"
                 : "hover:text-foreground",
             )}
           >

@@ -62,7 +62,7 @@ export function Section({
 }
 
 /**
- * Clean, lightweight section header pairing Persimmon Orange index with Cool Blue code highlight.
+ * Clean, lightweight section header pairing Persimmon Orange index dot with subtle mono eyebrow.
  */
 export function SectionHeader({
   index,
@@ -81,12 +81,12 @@ export function SectionHeader({
   return (
     <header className={cn("reveal mb-10 sm:mb-14 md:mb-18", className)}>
       {(index || code) && (
-        <div className="mb-4 flex items-center gap-2.5">
+        <div className="mb-3.5 flex items-center gap-2.5">
           <span
             aria-hidden="true"
             className="h-1.5 w-1.5 rounded-full bg-brand"
           />
-          <span className="type-label text-highlight">
+          <span className="type-label text-muted-foreground">
             {index && code ? `${index} / ${code}` : (code ?? index)}
           </span>
         </div>

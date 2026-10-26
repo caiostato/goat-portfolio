@@ -31,7 +31,7 @@ export function ExperienceSection({ dict }: { dict: Dictionary["experience"] }) 
           return (
             <li
               key={`${exp.company}-${exp.period}`}
-              className="reveal group border-t border-border/70 py-5 first:border-t-0 first:pt-0 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-14 md:py-10"
+              className="reveal group border-t border-border py-5 first:border-t-0 first:pt-0 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-14 md:py-10"
             >
               {/* Mobile collapsible trigger / Desktop sticky company meta */}
               <div className="md:sticky md:top-24 md:self-start">
@@ -61,8 +61,8 @@ export function ExperienceSection({ dict }: { dict: Dictionary["experience"] }) 
                         />
                       ) : null}
                     </div>
-                    <p className="text-sm font-medium text-brand">{exp.role}</p>
-                    <p className="type-label text-highlight/80">
+                    <p className="text-sm font-medium text-foreground-subtle">{exp.role}</p>
+                    <p className="type-label text-muted-foreground">
                       {exp.period}
                     </p>
                   </div>
@@ -95,7 +95,7 @@ export function ExperienceSection({ dict }: { dict: Dictionary["experience"] }) 
                     >
                       <span
                         aria-hidden="true"
-                        className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
+                        className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand/80"
                       />
                       {highlight}
                     </li>
@@ -106,7 +106,7 @@ export function ExperienceSection({ dict }: { dict: Dictionary["experience"] }) 
                   {exp.stack.map((tech) => (
                     <li
                       key={tech}
-                      className="type-mono rounded-md border border-highlight/35 bg-highlight/12 px-2.5 py-1 text-xs text-highlight"
+                      className="type-mono rounded-md border border-border bg-card/55 px-2.5 py-1 text-xs text-foreground-subtle"
                     >
                       {tech}
                     </li>

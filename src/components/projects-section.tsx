@@ -112,19 +112,19 @@ function Meta({
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
       {parts.length > 0 ? (
-        <p className="type-label text-highlight/85">{parts.join(" · ")}</p>
+        <p className="type-label text-muted-foreground">{parts.join(" · ")}</p>
       ) : null}
 
       {isLive ? (
-        <span className="type-label inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-subtle px-3 py-1 text-brand">
-          <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75 motion-reduce:hidden" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />
-          </span>
+        <span className="type-label inline-flex items-center gap-2 rounded-full border border-brand-border/60 bg-brand-subtle px-3 py-1 text-brand">
+          <span
+            aria-hidden="true"
+            className="inline-flex h-1.5 w-1.5 rounded-full bg-brand"
+          />
           {dict.liveLabel}
         </span>
       ) : (
-        <span className="type-label inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-muted-foreground">
+        <span className="type-label inline-flex items-center gap-1.5 rounded-full border border-border bg-card/50 px-3 py-1 text-muted-foreground">
           <Lock className="h-3 w-3" aria-hidden="true" />
           {dict.privateLabel}
         </span>
@@ -143,9 +143,9 @@ function Metrics({ project }: { project: Project }) {
         {project.metrics.map((metric) => (
           <div
             key={metric.label}
-            className="inline-flex items-center gap-2 rounded-lg border border-highlight/30 bg-highlight/10 px-3 py-1.5"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-3 py-1.5"
           >
-            <dd className="font-mono text-xs font-bold text-highlight">
+            <dd className="font-mono text-xs font-bold text-foreground">
               {metric.value}
             </dd>
             <dt className="text-xs text-muted-foreground">{metric.label}</dt>
@@ -153,12 +153,12 @@ function Metrics({ project }: { project: Project }) {
         ))}
       </dl>
 
-      {/* Desktop: large display metrics */}
-      <dl className="hidden flex-wrap gap-x-12 gap-y-4 border-t border-border/70 pt-5 md:flex">
+      {/* Desktop: large display metrics in crisp foreground so primary CTA owns --brand */}
+      <dl className="hidden flex-wrap gap-x-12 gap-y-4 border-t border-border pt-5 md:flex">
         {project.metrics.map((metric) => (
           <div key={metric.label} className="flex flex-col-reverse gap-1.5">
             <dt className="type-label text-muted-foreground">{metric.label}</dt>
-            <dd className="type-metric text-brand">{metric.value}</dd>
+            <dd className="type-metric text-foreground">{metric.value}</dd>
           </div>
         ))}
       </dl>
@@ -174,7 +174,7 @@ function Tags({ project }: { project: Project }) {
       {project.tags.map((tag) => (
         <li
           key={tag}
-          className="type-mono rounded-md border border-highlight/35 bg-highlight/12 px-2.5 py-1 text-xs text-highlight transition-colors hover:border-highlight/60 hover:bg-highlight/20"
+          className="type-mono rounded-md border border-border bg-card/55 px-2.5 py-1 text-xs text-foreground-subtle"
         >
           {tag}
         </li>
@@ -193,7 +193,7 @@ function Actions({ project, dict }: { project: Project; dict: ProjectsDict }) {
           href={project.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="group/cta inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold whitespace-nowrap text-brand-foreground transition-[background-color,transform] duration-150 ease-out hover:bg-brand-strong active:translate-y-px sm:w-auto sm:py-2.5 motion-reduce:transform-none"
+          className="group/cta inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold whitespace-nowrap text-brand-foreground shadow-[0_6px_20px_-4px_oklch(0.686_0.206_34.8/0.38)] transition-[background-color,transform,box-shadow] duration-150 ease-out hover:bg-brand-strong hover:shadow-[0_10px_24px_-4px_oklch(0.686_0.206_34.8/0.48)] active:translate-y-px sm:w-auto sm:py-2.5 motion-reduce:transform-none"
         >
           {dict.viewLive}
           <ArrowUpRight
@@ -209,9 +209,9 @@ function Actions({ project, dict }: { project: Project; dict: ProjectsDict }) {
           href={project.repo}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-highlight/40 bg-highlight/10 px-5 py-3 text-sm font-medium whitespace-nowrap text-highlight transition-colors duration-150 hover:bg-highlight hover:text-highlight-foreground sm:w-auto sm:py-2.5"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border-strong bg-card/80 px-5 py-3 text-sm font-medium whitespace-nowrap text-foreground transition-colors duration-150 hover:border-brand-border hover:bg-card-elevated sm:w-auto sm:py-2.5"
         >
-          <GitBranch className="h-4 w-4" aria-hidden="true" />
+          <GitBranch className="h-4 w-4 text-brand" aria-hidden="true" />
           {dict.viewRepo}
           <span className="sr-only">: {project.title}</span>
         </a>

@@ -35,7 +35,8 @@ function displayUrl(href: string) {
  *   live sites inside the `<iframe>` automatically render their mobile layout
  *   without needing a fake phone bezel inside a wide card.
  * - Independent per-card toggle (`Preview ao vivo` / `Arquitetura`) with zero
- *   height shift on switch.
+ *   height shift on switch and a calm neutral active state so `--brand` remains
+ *   reserved for the primary project CTA.
  */
 export function SitePreview({
   project,
@@ -85,13 +86,13 @@ export function SitePreview({
     <div
       ref={containerRef}
       className={cn(
-        "w-full max-w-[390px] overflow-hidden rounded-2xl border border-highlight/30 bg-card shadow-[0_20px_50px_oklch(0_0_0/0.45)]",
-        "transition-colors duration-200 ease-out group-hover:border-brand-border",
+        "w-full max-w-[390px] overflow-hidden rounded-2xl border border-border bg-card shadow-[0_20px_50px_oklch(0_0_0/0.45)]",
+        "transition-colors duration-200 ease-out group-hover:border-border-strong",
         className,
       )}
     >
       {/* Top Bar: Clickable URL + Independent View Switcher */}
-      <div className="flex flex-col gap-2 border-b border-border bg-card-elevated px-3 py-2.5 sm:px-3.5 sm:py-3">
+      <div className="flex flex-col gap-2 border-b border-border bg-card-elevated/85 px-3 py-2.5 sm:px-3.5 sm:py-3">
         <div className="flex flex-col gap-2 min-[400px]:flex-row min-[400px]:items-center min-[400px]:justify-between">
           {url && project.href ? (
             <a
@@ -99,14 +100,14 @@ export function SitePreview({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} (${url})`}
-              className="group/url type-mono inline-flex min-w-0 flex-1 items-center justify-between gap-2 truncate rounded-md border border-highlight/30 bg-background/90 px-2.5 py-1 text-xs text-highlight transition-colors hover:border-brand-border hover:text-brand"
+              className="group/url type-mono inline-flex min-w-0 flex-1 items-center justify-between gap-2 truncate rounded-md border border-border bg-background/85 px-2.5 py-1 text-xs text-foreground-subtle transition-colors hover:border-brand-border hover:text-foreground"
             >
               <span className="inline-flex items-center gap-1.5 truncate">
                 <Globe className="h-3 w-3 shrink-0 text-brand" aria-hidden="true" />
                 <span className="truncate">{url}</span>
               </span>
               <ArrowUpRight
-                className="h-3.5 w-3.5 shrink-0 opacity-70 transition-transform group-hover/url:translate-x-0.5 group-hover/url:-translate-y-0.5 group-hover/url:opacity-100"
+                className="h-3.5 w-3.5 shrink-0 opacity-60 transition-transform group-hover/url:translate-x-0.5 group-hover/url:-translate-y-0.5 group-hover/url:opacity-100"
                 aria-hidden="true"
               />
             </a>
@@ -116,7 +117,7 @@ export function SitePreview({
             </span>
           )}
 
-          {/* Independent Per-Card Mode Switcher */}
+          {/* Independent Per-Card Mode Switcher — neutral elevated active pill so primary CTA owns orange */}
           {project.href ? (
             <div
               role="group"
@@ -132,12 +133,18 @@ export function SitePreview({
                   setIsInView(true);
                 }}
                 className={cn(
-                  "flex-1 cursor-pointer rounded-md px-2 py-1 text-center font-mono text-[10px] font-semibold transition-colors min-[400px]:flex-initial",
+                  "inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1 text-center font-mono text-[10px] font-semibold transition-colors min-[400px]:flex-initial",
                   !isArchMode
-                    ? "bg-brand text-brand-foreground"
+                    ? "bg-card-elevated text-foreground shadow-xs ring-1 ring-border-strong"
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
+                {!isArchMode && (
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 rounded-full bg-brand"
+                  />
+                )}
                 {livePreviewLabel}
               </button>
               <button
@@ -149,12 +156,18 @@ export function SitePreview({
                   setIsInteractive(false);
                 }}
                 className={cn(
-                  "flex-1 cursor-pointer rounded-md px-2 py-1 text-center font-mono text-[10px] font-semibold transition-colors min-[400px]:flex-initial",
+                  "inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1 text-center font-mono text-[10px] font-semibold transition-colors min-[400px]:flex-initial",
                   isArchMode
-                    ? "bg-brand text-brand-foreground"
+                    ? "bg-card-elevated text-foreground shadow-xs ring-1 ring-border-strong"
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
+                {isArchMode && (
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 rounded-full bg-brand"
+                  />
+                )}
                 {architectureLabel}
               </button>
             </div>
@@ -223,7 +236,7 @@ export function SitePreview({
                     type="button"
                     tabIndex={isArchMode ? -1 : 0}
                     onClick={() => setIsInteractive(true)}
-                    className="pointer-events-auto inline-flex cursor-pointer items-center gap-2 rounded-full border border-brand-border bg-card/90 px-3.5 py-1.5 font-mono text-[10px] font-semibold tracking-wider text-foreground uppercase shadow-lg backdrop-blur-md transition-colors hover:border-brand hover:text-brand"
+                    className="pointer-events-auto inline-flex cursor-pointer items-center gap-2 rounded-full border border-border-strong bg-card/90 px-3.5 py-1.5 font-mono text-[10px] font-semibold tracking-wider text-foreground uppercase shadow-lg backdrop-blur-md transition-colors hover:border-brand-border hover:text-brand"
                   >
                     <span
                       aria-hidden="true"
@@ -357,10 +370,10 @@ function CleanArchitecturePreview({
   return (
     <div className="flex h-full w-full flex-col justify-between gap-3 overflow-y-auto bg-card p-4 sm:p-6">
       <div className="flex items-center justify-between gap-2 border-b border-border pb-3">
-        <span className="type-label text-brand">
+        <span className="type-label text-muted-foreground">
           SYSTEM TOPOLOGY // 0{index + 1}
         </span>
-        <span className="type-mono truncate text-xs text-highlight/85">
+        <span className="type-mono truncate text-xs text-muted-foreground">
           {project.tags.slice(0, 2).join(" · ")}
         </span>
       </div>
@@ -371,9 +384,9 @@ function CleanArchitecturePreview({
           return (
             <div
               key={node.title}
-              className="flex items-start gap-3 rounded-xl border border-highlight/25 bg-card-elevated/75 p-3 transition-colors hover:border-highlight/55 sm:gap-3.5 sm:p-4"
+              className="flex items-start gap-3 rounded-xl border border-border bg-card-elevated/60 p-3 sm:gap-3.5 sm:p-4"
             >
-              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-brand-border bg-brand-subtle text-brand">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border-strong bg-background/60 text-brand">
                 <Icon className="h-4 w-4" aria-hidden="true" />
               </span>
 
@@ -382,7 +395,7 @@ function CleanArchitecturePreview({
                   <span className="text-sm font-semibold text-foreground">
                     {node.title}
                   </span>
-                  <span className="type-mono text-[11px] font-semibold text-highlight">
+                  <span className="type-mono text-[11px] font-semibold text-muted-foreground">
                     {node.step}
                   </span>
                 </div>
@@ -400,9 +413,9 @@ function CleanArchitecturePreview({
           {project.metrics.map((m) => (
             <div
               key={m.label}
-              className="rounded-lg border border-highlight/25 bg-highlight/8 px-2.5 py-2 sm:px-3 sm:py-2.5"
+              className="rounded-lg border border-border bg-background/55 px-2.5 py-2 sm:px-3 sm:py-2.5"
             >
-              <div className="font-mono text-sm font-bold text-highlight sm:text-base">
+              <div className="font-mono text-sm font-bold text-foreground sm:text-base">
                 {m.value}
               </div>
               <div className="mt-0.5 text-[11px] leading-tight text-muted-foreground">
