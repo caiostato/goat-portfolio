@@ -42,6 +42,7 @@ export async function generateMetadata({
   const dict = await getDictionary(lang);
 
   return {
+    metadataBase: new URL("https://caiostato.dev"),
     title: dict.meta.title,
     description: dict.meta.description,
     icons: {

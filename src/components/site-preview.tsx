@@ -301,10 +301,32 @@ function CleanArchitecturePreview({
   index: number;
 }) {
   const titleLower = project.title.toLowerCase();
+  const isIrreverentt = titleLower.includes("irreverentt");
   const isCerasos = titleLower.includes("cerasos");
   const isArkea = titleLower.includes("arkea");
 
-  const nodes = isCerasos
+  const nodes = isIrreverentt
+    ? [
+        {
+          icon: Layers,
+          step: "01",
+          title: "3D Runway Atelier",
+          sub: "Scroll-driven depth lookbook & Motion",
+        },
+        {
+          icon: Server,
+          step: "02",
+          title: "Next.js 15 SSG Engine",
+          sub: "29 looks, JSON-LD & 0.5s mobile LCP",
+        },
+        {
+          icon: MessageSquare,
+          step: "03",
+          title: "Omnichannel Bridges",
+          sub: "Mercado Livre & WhatsApp Concierge",
+        },
+      ]
+    : isCerasos
     ? [
         {
           icon: MessageSquare,

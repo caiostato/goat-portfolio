@@ -37,6 +37,19 @@ const dictionary: Dictionary = {
       "Production systems and web platforms running live in the wild, paired with measurable architecture outcomes.",
     items: [
       {
+        title: "Irreverentt — Digital Atelier & Lookbook",
+        description:
+          "Editorial e-commerce showcase and interactive 3D runway lookbook for a women's fashion brand in Southern Brazil. Built with statically generated product pages for 29 studio-shot garments, omnichannel conversion flows integrating Mercado Livre and WhatsApp Concierge, JSON-LD SEO schema, and mobile rendering optimizations that reduced LCP from 15s to 0.5s.",
+        role: "Fullstack / Frontend Engineer",
+        period: "2026",
+        href: "https://irreverentt.com",
+        metrics: [
+          { value: "0.5s", label: "Mobile LCP (-97%)" },
+          { value: "29", label: "SSG catalog looks" },
+        ],
+        tags: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS v4", "Motion"],
+      },
+      {
         title: "Cerasos sales platform",
         description:
           "Pharmacy sales platform that runs on WhatsApp. Customers message, the Uazapi integration answers and creates the order, and Getnet handles payment from tokenization through the webhook that confirms it. An admin dashboard sits on top for order tracking, sales figures, and customer ratings.",
@@ -86,6 +99,18 @@ const dictionary: Dictionary = {
   experience: {
     heading: "Experience",
     items: [
+      {
+        company: "Irreverentt",
+        period: "2026",
+        role: "Fullstack / Frontend Engineer",
+        highlights: [
+          "Architected and launched Irreverentt's digital atelier (irreverentt.com) with Next.js 15 and React 19, engineering a scroll-driven 3D lookbook, omnichannel Mercado Livre/WhatsApp checkout bridges, and asset pipeline optimizations that cut mobile LCP from 15s to 0.5s.",
+          "Implemented static site generation (SSG) for 29 studio-photographed garments with structured JSON-LD (Schema.org) metadata and dynamic sitemap/robots.",
+          "Engineered multi-channel conversion routing seamlessly bridging the editorial catalog to Mercado Livre Oficial, WhatsApp Concierge, and the physical boutique.",
+          "Configured strict CSP/HSTS security headers and LGPD-compliant Google Analytics 4 tracking.",
+        ],
+        stack: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS v4", "Motion"],
+      },
       {
         company: "Cerasos",
         period: "Dec 2025 - Present",

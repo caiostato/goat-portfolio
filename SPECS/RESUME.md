@@ -2,7 +2,7 @@
 
 **Frontend Engineer | React & Next.js Architecture Expert**  
 📍 Sorocaba, SP, Brazil | 📞 +55 15 99631-9599 | ✉️ caiobnstato@gmail.com  
-🔗 [LinkedIn](https://linkedin.com/in/caiostato) | 🐙 [GitHub](https://github.com/caiostato) | 🌐 [Portfolio](https://caiostato.vercel.app)
+🔗 [LinkedIn](https://linkedin.com/in/caiostato) | 🐙 [GitHub](https://github.com/caiostato) | 🌐 [Portfolio](https://caiostato.dev)
 
 ---
 

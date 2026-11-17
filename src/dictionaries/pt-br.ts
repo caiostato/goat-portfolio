@@ -37,6 +37,19 @@ const dictionary: Dictionary = {
       "Sistemas em produção e plataformas web rodando ao vivo, com métricas reais de arquitetura e operação.",
     items: [
       {
+        title: "Irreverentt — Ateliê Digital & Lookbook",
+        description:
+          "Vitrine editorial e lookbook 3D interativo para marca de moda feminina na Serra Gaúcha. Arquitetado com geração estática (SSG) para 29 peças fotografadas em estúdio, funil omnichannel integrado ao Mercado Livre Oficial e WhatsApp Concierge, dados estruturados JSON-LD/SEO e otimização de renderização mobile que reduziu o LCP de 15s para 0.5s.",
+        role: "Engenheiro Fullstack",
+        period: "2026",
+        href: "https://irreverentt.com",
+        metrics: [
+          { value: "0.5s", label: "LCP Mobile (-97%)" },
+          { value: "29", label: "Looks em SSG" },
+        ],
+        tags: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS v4", "Motion"],
+      },
+      {
         title: "Plataforma de vendas Cerasos",
         description:
           "Plataforma de vendas para farmácias que roda no WhatsApp. O cliente manda mensagem, a integração via Uazapi responde e cria o pedido, e a Getnet cuida do pagamento da tokenização até o webhook que confirma. Por cima disso, um dashboard administrativo com rastreamento de pedidos, números de vendas e avaliações.",
@@ -86,6 +99,18 @@ const dictionary: Dictionary = {
   experience: {
     heading: "Experiência",
     items: [
+      {
+        company: "Irreverentt",
+        period: "2026",
+        role: "Engenheiro Fullstack / Frontend",
+        highlights: [
+          "Arquitetou e lançou o ateliê digital da Irreverentt (irreverentt.com) com Next.js 15 e React 19, desenvolvendo um lookbook 3D interativo, integração omnichannel com Mercado Livre e WhatsApp Concierge, e otimizações de mídia que reduziram o LCP mobile de 15s para 0.5s.",
+          "Implementou geração estática (SSG) para 29 peças fotografadas em estúdio com dados estruturados JSON-LD (Schema.org), sitemap dinâmico e robots.",
+          "Estruturou o funil de conversão omnichannel conectando a vitrine ao Mercado Livre Oficial, WhatsApp Concierge e à boutique física.",
+          "Configurou headers de segurança estritos CSP/HSTS e conformidade com a LGPD usando Google Analytics 4.",
+        ],
+        stack: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS v4", "Motion"],
+      },
       {
         company: "Cerasos",
         period: "Dez 2025 - Presente",
