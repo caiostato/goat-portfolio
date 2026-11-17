@@ -6,6 +6,11 @@ import "../globals.css";
 import { cn } from "@/lib/utils";
 import { htmlLangMap, isLocale, locales } from "@/i18n/config";
 import { CookieBanner } from "@/components/cookie-banner";
+import { StructuredData } from "@/components/structured-data";
+import {
+  GoogleAnalytics,
+  GoogleTagManagerNoscript,
+} from "@/components/google-analytics";
 import { getDictionary } from "./dictionaries";
 
 // Three families, three jobs: Geist reads body copy, Space Grotesk carries the
@@ -41,10 +46,40 @@ export async function generateMetadata({
   if (!isLocale(lang)) notFound();
   const dict = await getDictionary(lang);
 
+  const canonicalUrl =
+    lang === "pt-br" ? "https://caiostato.dev" : "https://caiostato.dev/en-us";
+
   return {
     metadataBase: new URL("https://caiostato.dev"),
-    title: dict.meta.title,
+    title: {
+      default: dict.meta.title,
+      template: "%s | Caio Stato",
+    },
     description: dict.meta.description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        "pt-BR": "https://caiostato.dev",
+        "en-US": "https://caiostato.dev/en-us",
+        "x-default": "https://caiostato.dev",
+      },
+    },
+    openGraph: {
+      title: dict.meta.title,
+      description: dict.meta.description,
+      url: canonicalUrl,
+      siteName: "Caio Stato",
+      locale: lang === "pt-br" ? "pt_BR" : "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
+      creator: "@caiostato",
+    },
+    authors: [{ name: "Caio Stato", url: "https://caiostato.dev" }],
+    creator: "Caio Stato",
     icons: {
       icon: [
         {
@@ -111,6 +146,8 @@ export default async function RootLayout({
         </noscript>
       </head>
       <body className="antialiased">
+        <GoogleTagManagerNoscript gtmId="GTM-KK2357RC" />
+        <StructuredData lang={lang} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-brand focus:px-4 focus:py-2.5 focus:font-mono focus:text-xs focus:font-bold focus:tracking-wider focus:text-brand-foreground focus:shadow-2xl focus:outline-2 focus:outline-offset-2 focus:outline-foreground"
@@ -122,6 +159,7 @@ export default async function RootLayout({
         {children}
         <CookieBanner lang={lang} dict={dict.cookieBanner}>
           {process.env.NODE_ENV === "production" && <Analytics />}
+          <GoogleAnalytics gaId="G-TG4J7QNZJC" gtmId="GTM-KK2357RC" />
         </CookieBanner>
       </body>
     </html>

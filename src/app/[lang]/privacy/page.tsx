@@ -27,9 +27,30 @@ export async function generateMetadata({
   if (!isLocale(lang)) notFound();
   const dict = await getDictionary(lang);
 
+  const canonicalUrl =
+    lang === "pt-br"
+      ? "https://caiostato.dev/privacy"
+      : "https://caiostato.dev/en-us/privacy";
+
   return {
     title: dict.privacy.metaTitle,
     description: dict.privacy.metaDescription,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        "pt-BR": "https://caiostato.dev/privacy",
+        "en-US": "https://caiostato.dev/en-us/privacy",
+        "x-default": "https://caiostato.dev/privacy",
+      },
+    },
+    openGraph: {
+      title: `${dict.privacy.metaTitle} | Caio Stato`,
+      description: dict.privacy.metaDescription,
+      url: canonicalUrl,
+      siteName: "Caio Stato",
+      locale: lang === "pt-br" ? "pt_BR" : "en_US",
+      type: "article",
+    },
   };
 }
 

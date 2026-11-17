@@ -4,6 +4,10 @@ import { NotFoundView } from "@/components/not-found-view";
 export const metadata: Metadata = {
   title: "404 — Página não encontrada | Caio Stato",
   description: "Página não encontrada / Page not found",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function LangNotFound() {

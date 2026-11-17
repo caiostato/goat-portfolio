@@ -2,9 +2,9 @@ import type { Dictionary } from "./types";
 
 const dictionary: Dictionary = {
   meta: {
-    title: "Caio Stato | Frontend Engineer, React & Next.js",
+    title: "Caio Stato | Frontend Engineer & UI Architect — React, Next.js, TypeScript",
     description:
-      "Portfolio of Caio Stato, a frontend engineer with 4+ years building React and Next.js applications for fintech platforms and digital products.",
+      "Portfolio of Caio Stato, Frontend Engineer & UI Architect with 4+ years building high-performance React, Next.js, and TypeScript applications for fintech platforms and digital products.",
   },
   nav: {
     ariaLabel: "Main navigation",
@@ -266,9 +266,9 @@ const dictionary: Dictionary = {
     learnMore: "Privacy Policy",
   },
   privacy: {
-    metaTitle: "Privacy Policy | Caio Stato",
+    metaTitle: "Privacy Policy",
     metaDescription:
-      "Full transparency on telemetry, cookies, and data practices across Caio Stato's portfolio. Compliant with LGPD and GDPR standards.",
+      "Transparency on anonymous performance telemetry, cookie policies, and data privacy adhering to LGPD and GDPR standards across Caio Stato's portfolio.",
     badge: "COMPLIANCE // LGPD & GDPR",
     title: "Privacy Policy",
     lastUpdated: "Last updated: March 2026",
@@ -282,7 +282,7 @@ const dictionary: Dictionary = {
         title: "1. Data Collection & Telemetry",
         paragraphs: [
           "This portfolio practices strict data minimization (Privacy by Design). We do not require account creation, logins, or submission of sensitive personal data.",
-          "Only when you explicitly provide consent, we utilize Vercel Analytics to monitor purely technical application performance metrics, including:",
+          "Only when you explicitly provide consent, we utilize Google Analytics 4 (via Google Tag Manager) and Vercel Analytics to monitor purely technical application performance metrics, including:",
         ],
         bulletPoints: [
           "Performance metrics and Core Web Vitals (LCP, FID/INP, CLS);",

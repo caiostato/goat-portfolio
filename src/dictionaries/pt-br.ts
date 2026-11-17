@@ -2,9 +2,9 @@ import type { Dictionary } from "./types";
 
 const dictionary: Dictionary = {
   meta: {
-    title: "Caio Stato | Frontend Engineer, React & Next.js",
+    title: "Caio Stato | Frontend Engineer & UI Architect — React, Next.js, TypeScript",
     description:
-      "Portfólio de Caio Stato, frontend engineer com 4+ anos construindo aplicações React e Next.js para plataformas fintech e produtos digitais.",
+      "Portfólio de Caio Stato, Frontend Engineer & UI Architect com 4+ anos construindo aplicações de alta performance em React, Next.js e TypeScript para fintechs e produtos digitais.",
   },
   nav: {
     ariaLabel: "Navegação principal",
@@ -266,9 +266,9 @@ const dictionary: Dictionary = {
     learnMore: "Política de Privacidade",
   },
   privacy: {
-    metaTitle: "Política de Privacidade | Caio Stato",
+    metaTitle: "Política de Privacidade",
     metaDescription:
-      "Transparência total sobre telemetria técnica, cookies e governança de dados no portfólio de Caio Stato. Em estrita conformidade com a LGPD e o GDPR.",
+      "Diretrizes de privacidade, governança técnica de dados, telemetria anônima de performance e conformidade com LGPD e GDPR no portfólio de Caio Stato.",
     badge: "CONFORMIDADE // LGPD & GDPR",
     title: "Política de Privacidade",
     lastUpdated: "Última atualização: Março de 2026",
@@ -282,7 +282,7 @@ const dictionary: Dictionary = {
         title: "1. Coleta de Dados e Telemetria",
         paragraphs: [
           "Este portfólio adota a filosofia de minimização de dados (Privacy by Design). Não exigimos criação de conta, login ou fornecimento de informações pessoais sensíveis para navegação.",
-          "Quando você consente expressamente, utilizamos o Vercel Analytics para monitoramento de métricas puramente técnicas e de desempenho da aplicação, tais como:",
+          "Quando você consente expressamente, utilizamos o Google Analytics 4 (via Google Tag Manager) e o Vercel Analytics para monitoramento de métricas puramente técnicas e de desempenho da aplicação, tais como:",
         ],
         bulletPoints: [
           "Métricas de performance e Core Web Vitals (LCP, FID/INP, CLS);",
